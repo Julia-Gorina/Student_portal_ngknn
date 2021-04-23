@@ -1,0 +1,53 @@
+<template>
+  <div class="date-and-week">
+    <div class="date-and-week__date">
+      {{ date.getDate() }} {{ month[date.getMonth()] }}
+    </div>
+    <div class="date-and-week__week">
+      {{ week() }}
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "DateAndWeek",
+  data() {
+    return {
+      date: new Date(),
+      month: ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Сентября','Октября', 'Ноября','Декабря'],
+      WeekText: ['Понедельник', 'Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье']
+    }
+  },
+  methods:{
+    week(){
+      let year = this.date.getFullYear();
+      let begin = this.date.getMonth() > 8 ? new Date(`${year}-09-01T00:00`) : new Date(`${year}-01-01T00:00`)
+      let dayWeek = begin.getDay();
+      let week = Math.ceil((((this.date - begin) / 1000 / 60 / 60 / 24 + dayWeek-1  ) / 7));
+      week = week%2 !== 0 ? 'Нижняя' : 'Верхняя'
+      // return "ПОНЕДЕЛЬНИК, ВЕРХНЯЯ НЕДЕЛЯ"
+      let str = `${this.WeekText[this.date.getDay()]}, ${week} неделя`;
+      return str
+    }
+  },
+  mounted() {
+    this.date = new Date()
+  }
+}
+</script>
+
+<style scoped lang="less">
+.date-and-week{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 18px;
+  line-height: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  &__week{
+    font-size: 11px;
+  }
+}
+</style>
