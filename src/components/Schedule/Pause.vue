@@ -11,8 +11,10 @@
         <template v-else>
            Осталось {{ pauseProgress.toFixed(0) }} мин.
         </template>
+
       </div>
     </div>
+    {{ }}
   </div>
 </template>
 
@@ -43,7 +45,7 @@ export default {
   watch:{
     now(){
       if (this.pauseProgress){
-        this.$refs['progressvalue'].style.width = 100 - (this.startLessonTwo - this.now) / 1000 / 60 + '%'
+        this.$refs['progressvalue'].style.width = (100 -  100 / (this.calcMinutes() / this.pauseProgress.toFixed(0)) ) + '%'
       }
     }
   },
@@ -98,13 +100,14 @@ export default {
   margin-top: 5px;
   margin-bottom: 5px;
   border: 1px solid #C2C1C1;
+  overflow: hidden;
 }
 
 .progress-value {
   animation: load 3s normal forwards;
-  box-shadow: 0 10px 40px -10px #00cd80;
+  box-shadow: 0 10px 40px -10px #C2C1C1;
   border-radius: 100px;
-  background: #00cd80;
+  background: #D13918;
   height: 30px;
   width: 0;
   transition: 1s;

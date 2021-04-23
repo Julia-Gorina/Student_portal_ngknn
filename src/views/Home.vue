@@ -3,10 +3,10 @@
     <MainHeader>Доброе утро!</MainHeader>
     <NumberOfPairs :lessons="lessons" />
 
-    <img src="img/layout/header/header.jpg" alt="" class="home-img">
+    <img src="img/layout/header/glav.jpg" alt="" class="home-img">
     <DateAndWeek />
     <template v-for="(lesson, index) in lessons" :key="lesson.id">
-      <Lesson :lesson="lesson"/>
+      <Lesson :lesson="lesson" :prevLesson="lessons[index-1]"/>
       <Pause v-if="index !== lessons.length - 1" :lesson="[lesson ,lessons[index+1]]"/>
     </template>
     <transition name="fade">
@@ -38,11 +38,8 @@ export default {
   },
   methods: {
     async getLesson() {
-      this.lessons = (await axios.get('http://localhost:3000/lesson/')).data;
-      // //ToDo: Убрать задержку на продакшене
-      setTimeout(()=>{
+      this.lessons = (await axios.get('http://192.168.10.232:3000/lesson/')).data;
         this.loading = false;
-      },2000)
     }
   },
   mounted() {
@@ -58,6 +55,7 @@ export default {
 
 .home-img{
   max-width: 100%;
+
 }
 
 .fade-enter-active, .fade-leave-active {

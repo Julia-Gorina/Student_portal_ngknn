@@ -18,6 +18,6 @@ export default {
 
 <style lang="less">
   .body{
-    padding-bottom: 52px;
+    padding-bottom: 62px;
   }
 </style>

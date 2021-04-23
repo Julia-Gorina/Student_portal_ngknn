@@ -23,5 +23,9 @@ export default {
     font-size: 14px;
     line-height: 16px;
     padding-bottom: 5px;
+    font-family: 'Comfortaa';
+    font-weight: normal;
+    padding-top: 0px;
+
   }
 </style>

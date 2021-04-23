@@ -26,8 +26,7 @@ export default {
       let dayWeek = begin.getDay();
       let week = Math.ceil((((this.date - begin) / 1000 / 60 / 60 / 24 + dayWeek-1  ) / 7));
       week = week%2 !== 0 ? 'Нижняя' : 'Верхняя'
-      // return "ПОНЕДЕЛЬНИК, ВЕРХНЯЯ НЕДЕЛЯ"
-      let str = `${this.WeekText[this.date.getDay()]}, ${week} неделя`;
+      let str = `${this.WeekText[this.date.getDay()-1]}, ${week} неделя`;
       return str
     }
   },
@@ -46,8 +45,17 @@ export default {
   line-height: 20px;
   padding-top: 5px;
   padding-bottom: 5px;
+  font-family: 'Comfortaa';
+  font-weight: bold;
+  padding-left: 7px;
+
   &__week{
     font-size: 11px;
+    font-family: 'Comfortaa';
+    line-height: 12px;
+    text-transform: uppercase;
+    padding-right: 11px ;
+
   }
 }
 </style>
