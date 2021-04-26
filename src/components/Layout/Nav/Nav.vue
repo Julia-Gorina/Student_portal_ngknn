@@ -17,14 +17,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .nav{
   display: flex;
   background-color: #fff;
   justify-content: center;
   align-items: center;
   position: fixed;
-  bottom: 10px;
+  padding-bottom: env(safe-area-inset-bottom, 10px);
+  bottom: 0;
   left: 0;
   width: 100%;
 }

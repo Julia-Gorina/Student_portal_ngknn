@@ -18,6 +18,17 @@ export default {
 
 <style lang="less">
   .body{
-    padding-bottom: 62px;
+    padding-bottom: env(safe-area-inset-bottom, 62px);
+  }
+  *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gradient{
+    background: linear-gradient(180deg, #F2A35A 0%, rgba(209, 57, 24, 0.505208) 49.48%, rgba(196, 196, 196, 0) 80%);
+    padding-right: 10px;
+    padding-left: 10px;
   }
 </style>

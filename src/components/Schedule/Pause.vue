@@ -1,7 +1,4 @@
 <template>
-<!--  <div class="pause" :class="className" :style="`background-image: linear-gradient(to right, red 0%, red ${pauseProgress()}%, white ${pauseProgress()}%, white 100%)`">-->
-<!--    -->
-<!--  </div>-->
   <div class="progress">
     <div class="progress-value" ref="progressvalue">
       <div class="progress-title">
@@ -24,10 +21,10 @@ export default {
   data() {
     return {
       status: '',
-      now: Date.now(),
-      startLessonOne: Date.now(),
-      endLessonOne: Date.now(),
-      startLessonTwo: Date.now(),
+      now: null,
+      startLessonOne: null,
+      endLessonOne: null,
+      startLessonTwo: null,
       timer: null
     }
   },
@@ -39,7 +36,7 @@ export default {
       if (this.now < this.endLessonOne) {
         return false
       }
-      return (this.startLessonTwo - this.now) / 1000 / 60
+      return this.startLessonTwo - this.now
     }
   },
   watch:{
@@ -51,23 +48,33 @@ export default {
   },
   methods: {
     calcMinutes() {
-      return (this.startLessonTwo - this.endLessonOne) / 1000 / 60;
+      return this.startLessonTwo - this.endLessonOne;
     },
     nowTime(){
       this.timer = setInterval(() => {
-        this.now = Date.now()
+        this.now = this.getMinut(new Date().toLocaleTimeString());
       }, 1000)
+    },
+    getMinut(stringTime){
+      let times = stringTime.split(':')
+      let minutes = +times[0] * 60 + +times[1];
+      return minutes;
     }
 
   },
   mounted() {
-    this.startLessonOne = new Date(`${this.lesson[0].date}T${this.lesson[0].time}`);
-    this.endLessonOne = new Date(+(this.startLessonOne) + this.lesson[0].duration * 60 * 1000);
-    this.startLessonTwo = new Date(`${this.lesson[1].date}T${this.lesson[1].time}`);
-    if (this.startLessonTwo > Date.now()){
+    // this.startLessonOne = new Date(`${this.lesson[0].date}T${this.lesson[0].time}`);
+    this.startLessonOne = this.getMinut(this.lesson[0].time)
+    // this.endLessonOne = new Date(+(this.startLessonOne) + this.lesson[0].duration * 60 * 1000);
+    this.endLessonOne = this.getMinut(this.lesson[0].time) + +this.lesson[0].duration;
+    // this.startLessonTwo = new Date(`${this.lesson[1].date}T${this.lesson[1].time}`);
+    this.startLessonTwo = this.getMinut(this.lesson[1].time);
+    this.now = this.getMinut(new Date().toLocaleTimeString());
+
+    if (this.startLessonTwo > this.now){
       this.nowTime()
     } else {
-      this.now = Date.now()
+      this.now = this.getMinut(new Date().toLocaleTimeString());
     }
 
   }

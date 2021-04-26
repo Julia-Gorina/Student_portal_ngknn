@@ -6,27 +6,28 @@
       </div>
     </header>
     <div class="lesson__title">
-      {{ lesson.title }}
+      {{ lesson.subject }}
     </div>
     <div class="lesson__teacher">
       {{ lesson.teacher }}
     </div>
     <div class="lesson__office">
-      {{ lesson.office }}
+      {{ lesson.classroom }}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: '',
+  name: 'lesson',
   data() {
     return {
       timer: null,
       className: '',
       startLesson: null,
       endLesson: null,
-      endPrevLesson: null
+      endPrevLesson: null,
+      now: null
     }
   },
   props: {
@@ -37,31 +38,64 @@ export default {
     checkActive() {
 
       this.timer = setInterval(()=>{
-        let now = Date.now();
-        if (this.endLesson < now ) {
+        this.now = this.getMinut(new Date().toLocaleTimeString());
+
+        if (this.endLesson < this.now ) {
           this.className = 'lesson_ended';
           clearInterval(this.timer);
         }
-        if (this.endLesson > now ) {
-          this.className = 'lesson_active'
+
+        if (this.endLesson > this.now && this.startLesson > this.now) {
+          this.className = '';
         }
+
+        if (this.endLesson > this.now && this.startLesson < this.now ) {
+          this.className = 'lesson_active';
+        }
+
+        if (this.endPrevLesson < this.now && this.startLesson > this.endLesson ){
+          this.className = 'lesson_active';
+        }
+
+
+
       },1000)
 
 
     },
     timeLesson(){
       // this.startLesson должна быть датой с временм this.lesson.time
-      this.startLesson = new Date(`${this.lesson.date}T${this.lesson.time }`);
-      this.endLesson = new Date(+(this.startLesson) + this.lesson.duration*60*1000);
-      return `${this.trueTime(this.startLesson)} - ${this.trueTime(this.endLesson)}`;
+
+      //this.startLesson = new Date(`${this.lesson.date}T${this.lesson.time }`);
+      //this.endLesson = new Date(+(this.startLesson) + this.lesson.duration*60*1000);
+      // return `${this.trueTime(this.startLesson)} - ${this.trueTime(this.endLesson)}`;
+
+      this.endLesson = this.getMinut(this.lesson.time) + +this.lesson.duration;
+      let hEnd =  Math.floor(this.endLesson / 60)
+      let mEnd = Math.abs(this.endLesson - hEnd * 60);
+      let str = `${this.lesson.time} - ${hEnd < 10 ? '0' + hEnd : hEnd }:${mEnd}`
+      return str
+
     },
-    trueTime(dateTime){
-      return dateTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+    getMinut(stringTime){
+      let times = stringTime.split(':')
+      let minutes = +times[0] * 60 + +times[1];
+      return minutes;
     }
+    // trueTime(dateTime){
+    //   return dateTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+    // }
 
   },
   mounted() {
-    this.endPrevLesson = new Date(+(this.prevLesson.startLessonOne) + this.lesson[0].duration * 60 * 1000);
+    //this.endPrevLesson = new Date(+(this.prevLesson.startLessonOne) + this.lesson[0].duration * 60 * 1000);
+    if (this.prevLesson){
+      this.endPrevLesson = this.getMinut(this.prevLesson.time);
+    } else{
+      this.endPrevLesson = 0
+    }
+
+    this.startLesson = this.getMinut(this.lesson.time);
     this.checkActive();
   }
 }
@@ -105,12 +139,6 @@ export default {
     color: #000000;
     font-weight: bold;
   }
-  &__type{
-    font-size:15px;
-    line-height: 18px;
-    color: #534993;
-    padding: 0 5px;
-  }
   &__teacher{
     font-size: 12px;
     line-height: 12px;
@@ -118,7 +146,7 @@ export default {
   }
 
   &__office{
-    font-size: 11px;
+    font-size: 12px;
     line-height: 13px;
   }
 
