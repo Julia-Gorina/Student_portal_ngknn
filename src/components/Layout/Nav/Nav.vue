@@ -24,6 +24,7 @@ export default {
   justify-content: center;
   align-items: center;
   position: fixed;
+  padding-top: 5px;
   padding-bottom: env(safe-area-inset-bottom, 10px);
   bottom: 0;
   left: 0;

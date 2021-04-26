@@ -86,5 +86,38 @@
       "name": "Страховое дело",
       "image": "/img/Schedule/12.png"
     }
+  ],
+  "Section": [
+    {
+      "id": 1,
+      "name": "Спорт",
+      "image": "/img/Sections/sport.png"
+    },
+    {
+      "id": 2,
+      "name": "Танцы",
+      "image": "/img/Sections/dance.png"
+    },
+    {
+      "id": 3,
+      "name": "Карьера",
+      "image": "/img/Sections/business.png"
+    },
+    {
+      "id": 4,
+      "name": "Военный клуб",
+      "image": "/img/Sections/war.png"
+    },
+    {
+      "id": 5,
+      "name": "Пение",
+      "image": "/img/Sections/song.png"
+    },
+    {
+      "id": 6,
+      "name": "Информатика",
+      "image": "/img/Sections/information.png"
+    }
   ]
+
 }

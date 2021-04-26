@@ -30,5 +30,14 @@ export default {
     background: linear-gradient(180deg, #F2A35A 0%, rgba(209, 57, 24, 0.505208) 49.48%, rgba(196, 196, 196, 0) 80%);
     padding-right: 10px;
     padding-left: 10px;
+    min-height: 100vh;
+    background-attachment: fixed;
+  }
+  .grad{
+    background: linear-gradient(180deg, #F2A35A 0%, #D13918 47.4%, #480E06 100%);
+    background-attachment: fixed;
+    padding-right: 10px;
+    padding-left: 10px;
+    min-height: 100vh;
   }
 </style>

@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     async getLesson() {
-      this.lessons = (await axios.get('http://192.168.10.232:3000/lesson/')).data;
+      this.lessons = (await axios.get('http://192.168.10.46:3000/lesson/')).data;
         this.loading = false;
     }
   },

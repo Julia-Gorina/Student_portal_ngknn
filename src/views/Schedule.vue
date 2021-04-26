@@ -3,7 +3,7 @@
 
 <PageTitle>Расписание занятий</PageTitle>
 
-  <div class="specials">
+  <div class="specials" v-if="specials.length !== 0">
     <SpecialItem v-for="special in specials" :key="special.id" :special="special" />
   </div>
 
@@ -29,7 +29,7 @@ name: "Schedule",
   },
   methods:{
     async getSpecial() {
-      this.specials = (await axios.get('http://192.168.10.232:3000/Special/')).data;
+      this.specials = (await axios.get('http://192.168.10.46:3000/Special/')).data;
     }
   },
   mounted(){
@@ -44,7 +44,6 @@ name: "Schedule",
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-left: 3px;
 
 }
 .Zag{
