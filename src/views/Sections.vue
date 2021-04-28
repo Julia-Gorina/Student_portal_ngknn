@@ -27,7 +27,7 @@ export default {
   },
   methods:{
     async getSection(){
-      this.sections = (await axios.get('http://192.168.10.46:3000/Section')).data;
+      this.sections = (await axios.get(this.$store.getters.getServer+'/Section')).data;
     }
   },
   mounted(){

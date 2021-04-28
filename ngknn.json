@@ -118,6 +118,12 @@
       "name": "Информатика",
       "image": "/img/Sections/information.png"
     }
+  ],
+  "Option": [
+    {
+      "id": 1,
+      "name": "Пенсионный фонд"
+    }
   ]
 
 }

@@ -29,7 +29,7 @@ name: "Schedule",
   },
   methods:{
     async getSpecial() {
-      this.specials = (await axios.get('http://192.168.10.46:3000/Special/')).data;
+      this.specials = (await axios.get(this.$store.getters.getServer+'/Special/')).data;
     }
   },
   mounted(){
