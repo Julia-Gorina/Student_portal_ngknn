@@ -5,29 +5,35 @@
       <p class="sp__subtitle">Чтобы заказать справку учащиегося, заполните пожалуйста поля, которые представлены ниже</p>
       <PageInput title="Введите группу:" id="firstName" type="text"/>
       <PageInput title="Введите ФИО:" id="twoName" type="text"/>
-      <PageInput title="Введите дату рождения:" id="threeName" type="date"/>
+      <PageInput title="Введите дату рождения:" id="threeName" type="date"  />
+      <DatePicker v-model="date" />
+      <MyDatePicker/>
       <PageInput title="Введите количество справок:" id="fourName" type="number"  />
       <Select title="Выберите место требования:" id="fiveName" :options="options"/>
       <Button title="Оформить заявку" id="sprav"/>
+
     </div>
   </div>
 
 </template>
 
 <script>
-
+import { DatePicker } from 'v-calendar';
 import SpravTitle from "@/components/Layout/SpravTitle";
 import PageInput from "@/components/Layout/PageInput";
 import Select from "@/components/Layout/Select";
 import Button from "@/components/Layout/Button";
+import MyDatePicker from "@/components/Layout/MyDatePicker";
+
 export default {
   name: "reference",
-  components: {Button, Select, PageInput, SpravTitle},
+  components: {MyDatePicker, Button, Select, PageInput, SpravTitle, DatePicker,},
   data(){
     return{
       options: [
           "Пенсионный фонд", "Военкомат","По месту требования"
-      ]
+      ],
+      date: ''
 
     }
   }

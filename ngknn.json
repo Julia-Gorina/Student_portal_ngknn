@@ -119,10 +119,32 @@
       "image": "/img/Sections/information.png"
     }
   ],
-  "Option": [
+  "Groups": [
     {
       "id": 1,
-      "name": "Пенсионный фонд"
+      "groups": [
+        {
+          "id": 1,
+          "title": "21БД"
+        },
+        {
+          "id": 2,
+          "title": "22БД"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "groups": [
+        {
+          "id": 1,
+          "title": "11Л"
+        },
+        {
+          "id": 2,
+          "title": "12Л"
+        }
+      ]
     }
   ]
 

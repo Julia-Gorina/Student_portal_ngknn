@@ -1,12 +1,12 @@
 <template>
-  <div class = "special">
+  <router-link :to="'/department/'+special.id" class = "special">
     <div class = "special__image">
       <img :src="special.image" alt="">
     </div>
     <div class = "special__name">
       {{ special.name }}
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -19,6 +19,10 @@ export default {
 </script>
 
 <style scoped>
+a{
+  text-decoration: none;
+  color: black;
+}
 
 .special{
   width: 33%;

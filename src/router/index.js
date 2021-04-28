@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Reference from "@/views/Reference";
 import Schedule from "@/views/Schedule";
 import Sections from "@/views/Sections";
+import Department from "@/views/Department";
 
 const routes = [
   {
@@ -32,6 +33,12 @@ const routes = [
     path: '/Sections',
     name: 'Sections',
     component: Sections
+  }
+  ,
+  {
+    path: '/department/:id',
+    name: 'Department',
+    component: Department
   }
 ]
 

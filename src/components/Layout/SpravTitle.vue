@@ -28,11 +28,13 @@ h1{
   &::after{
     content: "";
     display: block;
-    width: 100%;
+    width: 90%;
     height: 2px;
+    text-align: center;
     background-color: #D13918;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.30);
     margin-top: 5px;
+    margin-left: 19px;
 
 
 
