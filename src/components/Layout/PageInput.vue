@@ -20,25 +20,27 @@ label{
   font-size:13px;
   line-height: 14px;
   color: #000000;
-  text-align: left;
+
   margin-top: 20px;
-  margin-left: 20px;
+
   display: flex;
   flex-direction: column;
 }
 input{
   margin-top: 10px;
-  height: 27px;
+  height: 35px;
   border: 1px solid #F2A35A;
   box-sizing: border-box;
   border-radius: 4px;
   font-size: 14px;
-  width: 90%;
+  width: 100%;
   text-indent: 7px;
 }
 [type="date"]{
   font-family: 'Comfortaa';
   font-size: 13px;
+
+
 
 
 }

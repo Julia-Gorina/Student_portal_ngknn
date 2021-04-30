@@ -2,11 +2,11 @@
   <div class="otdel gradient">
     <div class="stroka">
       <Arrow></Arrow>
-      <RepresData ></RepresData>
+      <RepresData @changeView="changeView"  ></RepresData>
     </div>
-    <PageTitle />
-    <div class="square">
-    <GroupItem v-for="group in groups" :key="group.id" :group="group" class="GroupItem"/>
+    <NewTitle > {{ name }}</NewTitle>
+    <div class="groups-list">
+      <GroupItem v-for="group in groups" :key="group.id" :group="group" :class="statusView"/>
     </div>
   </div>
 </template>
@@ -16,19 +16,26 @@ import axios from "axios";
 import GroupItem from "@/components/Layout/GroupItem";
 import RepresData from "../components/Layout/RepresData";
 import Arrow from "../components/Layout/Arrow";
-import PageTitle from "../components/Layout/PageTitle";
+import NewTitle from "../components/Layout/NewTitle";
 
 export default {
 name: "Department",
-  components: {PageTitle, Arrow, GroupItem, RepresData},
+  components: {NewTitle, Arrow, GroupItem, RepresData},
   data(){
   return{
-    groups: []
+    groups: [],
+    name: '',
+    statusView: 'list'
   }
   },
   methods: {
     async getGroups() {
-      this.groups = (await axios.get(this.$store.getters.getServer+'/groups/' + this.$route.params.id)).data.groups;
+      let data = (await axios.get(this.$store.getters.getServer+'/api/specialties/' + this.$route.params.id + '/')).data;
+      this.groups = data.groups;
+      this.name = data.name;
+    },
+    changeView(view){
+      this.statusView = view
     }
   },
   mounted() {
@@ -41,18 +48,13 @@ name: "Department",
 .stroka{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 70px;
 }
-.square{
+.groups-list{
   margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
-.GroupItem {
-  text-align: center;
-  margin-top: 10px;
-  background: #F9C474;
-  border-radius: 3px;
-  font-size: 20px;
-  height: 150px;
-  width: 150px;
 
-}
 </style>

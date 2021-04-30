@@ -1,16 +1,22 @@
 <template>
-  <button><img src="/img/Otdel/arrow.png" class="first"></button>
+  <button @click.prevent="back"><img src="/img/Otdel/arrow.png" class="first"></button>
 </template>
 
 <script>
+
 export default {
-  name: "Arrow"
+  name: "Arrow",
+  methods: {
+    back(){
+      this.$router.go(-1);
+    }
+  }
 }
 </script>
 
 <style scoped>
 .first{
-  margin-top: 18px;
+height: 25px;
 }
 button{
   background: transparent;

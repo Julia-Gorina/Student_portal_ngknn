@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    server: "http://localhost:3000"
+    server: "http://192.168.100.20:8000"
+
   },
   mutations: {
   },

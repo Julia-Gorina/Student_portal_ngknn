@@ -38,7 +38,35 @@ export default {
   },
   methods: {
     async getLesson() {
-      this.lessons = (await axios.get(this.$store.getters.getServer+'/lesson/')).data;
+      let lessons = (await axios.get(this.$store.getters.getServer+'/api/lessons/')).data;
+      let newLesson = [];
+      lessons.forEach(element => {
+        let index = newLesson.findIndex(el=> el.time == element.time )
+        if(index === -1){
+          newLesson.push({
+            time: element.start_time,
+            duration: element.duration,
+            lessons: [
+              {
+                id: element.id,
+                subject: element.subject,
+                teacher: element.teacher,
+                classroom: element.classroom,
+                change: element.change
+              }
+            ]
+          })
+        } else {
+          newLesson[index].lessons.push({
+            id: element.id,
+            subject: element.subject,
+            teacher: element.teacher,
+            classroom: element.classroom,
+            change: element.change
+          })
+        }
+      });
+      this.lessons = newLesson;
         this.loading = false;
     }
   },

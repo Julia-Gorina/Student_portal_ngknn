@@ -1,31 +1,54 @@
 <template>
-  <div id="btnContainer">
-    <button v-on:click="ListView()"><img src="/img/Otdel/lin.png" alt="" class="firstImage"></button>
-    <button><img src="/img/Otdel/square.png" alt="" class="firstImage"></button>
+  <div class="btnContainer">
+    <button @click="changeView('list')"  ref="list" ><img src="/img/Otdel/line.svg"  alt="" class="firstImage"></button>
+    <button @click="changeView('grid')" ref="grid"  ><img src="/img/Otdel/sq.svg" alt="" class="firstImage"></button>
   </div>
 </template>
 
 <script>
 
+
 export default {
   name: "RepresData",
-
-  methods: {
-    async ListView() {
+  data() {
+    return{
 
     }
+  },
+  emits: ['changeView'],
+  methods: {
+    changeView(view) {
+      this.$refs['grid' ].style.backgroundColor = 'transparent'
+      this.$refs['list' ].style.backgroundColor = 'transparent'
+      this.$refs[view].style.backgroundColor = '#D13918'
+      this.$emit('changeView', view);
+
+      // if (view !== 'list') {
+      //   this.CSSStyleSheet("button").backgroundColor(black);
+      // }
+      // else {
+      //   this.CSSStyleSheet("button").backgroundColor(red);
+      // }
+    },
   }
 }
 </script>
 
 <style scoped>
-.pokaz{
-  margin-top: 18px;
-  background: #000;
-}
 button{
   background: transparent;
   border: 0;
   outline: none;
+  text-align: center;
+  padding-top: 2px;
+  padding-right: 1px;
+  padding-left: 1px;
 }
+.btnContainer{
+
+}
+.firstImage{
+  height: 30px;
+}
+
 </style>

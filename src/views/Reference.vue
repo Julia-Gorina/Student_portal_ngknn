@@ -6,8 +6,6 @@
       <PageInput title="Введите группу:" id="firstName" type="text"/>
       <PageInput title="Введите ФИО:" id="twoName" type="text"/>
       <PageInput title="Введите дату рождения:" id="threeName" type="date"  />
-      <DatePicker v-model="date" />
-      <MyDatePicker/>
       <PageInput title="Введите количество справок:" id="fourName" type="number"  />
       <Select title="Выберите место требования:" id="fiveName" :options="options"/>
       <Button title="Оформить заявку" id="sprav"/>
@@ -18,16 +16,16 @@
 </template>
 
 <script>
-import { DatePicker } from 'v-calendar';
+
 import SpravTitle from "@/components/Layout/SpravTitle";
 import PageInput from "@/components/Layout/PageInput";
 import Select from "@/components/Layout/Select";
 import Button from "@/components/Layout/Button";
-import MyDatePicker from "@/components/Layout/MyDatePicker";
+
 
 export default {
   name: "reference",
-  components: {MyDatePicker, Button, Select, PageInput, SpravTitle, DatePicker,},
+  components: { Button, Select, PageInput, SpravTitle},
   data(){
     return{
       options: [
@@ -44,14 +42,19 @@ export default {
 
 .Sprav{
   padding-top: 60px;
+
 }
+
 .sp{
   background: #FFFFFF;
   width: 100%;
-  min-height: 603px;
+  min-height: 500px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
-  text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 20px;
+
   &__subtitle{
     padding-top: 5px;
     font-size: 13px;

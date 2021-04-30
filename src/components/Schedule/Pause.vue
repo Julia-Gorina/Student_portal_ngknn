@@ -3,10 +3,10 @@
     <div class="progress-value" ref="progressvalue">
       <div class="progress-title">
         <template v-if="pauseProgress < 0 || pauseProgress == false">
-            Перерыв {{ calcMinutes() }} мин.
+          Перерыв {{ calcMinutes() }} мин.
         </template>
         <template v-else>
-           Осталось {{ pauseProgress.toFixed(0) }} мин.
+          Осталось {{ pauseProgress.toFixed(0) }} мин.
         </template>
 
       </div>

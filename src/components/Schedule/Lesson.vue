@@ -5,14 +5,22 @@
         {{ timeLesson() }}
       </div>
     </header>
-    <div class="lesson__title">
-      {{ lesson.subject }}
-    </div>
-    <div class="lesson__teacher">
-      {{ lesson.teacher }}
-    </div>
-    <div class="lesson__office">
-      {{ lesson.classroom }}
+    <div v-for="item in lesson.lessons" :key="item.id">
+      <hr>
+      <strong>{{ item.change ? 'Замена' : ''}}</strong>
+      <div class="lesson__title">
+        {{ item.subject }}
+      </div>
+      <div class="lesson__teacher">
+        {{ item.teacher }}
+      </div>
+      <div class="lesson__office">
+        {{ item.classroom }}
+      </div>
+      <div v-if="item.subject === ''">
+        Урок отменен
+      </div>
+
     </div>
   </div>
 </template>

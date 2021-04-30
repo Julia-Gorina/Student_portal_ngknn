@@ -27,7 +27,7 @@ export default {
   },
   methods:{
     async getSection(){
-      this.sections = (await axios.get(this.$store.getters.getServer+'/Section')).data;
+      this.sections = (await axios.get(this.$store.getters.getServer+'/api/sections/')).data;
     }
   },
   mounted(){

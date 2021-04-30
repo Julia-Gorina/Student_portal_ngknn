@@ -18,7 +18,7 @@ export default {
 
 <style lang="less">
   .body{
-    padding-bottom: env(safe-area-inset-bottom, 62px);
+    padding-bottom: 66px;
   }
   *{
     box-sizing: border-box;
@@ -32,6 +32,7 @@ export default {
     padding-left: 10px;
     min-height: 100vh;
     background-attachment: fixed;
+    padding-bottom: 66px;
   }
   .grad{
     background: linear-gradient(180deg, #F2A35A 0%, #D13918 47.4%, #480E06 100%);
@@ -39,5 +40,6 @@ export default {
     padding-right: 10px;
     padding-left: 10px;
     min-height: 100vh;
+    padding-bottom: 66px;
   }
 </style>
