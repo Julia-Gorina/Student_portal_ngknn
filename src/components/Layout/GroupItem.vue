@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="group">
   {{group.title}}
 </div>
 </template>
@@ -14,5 +14,7 @@ name: "GroupItem",
 </script>
 
 <style scoped>
-
+.group{
+ top: 100px;
+}
 </style>

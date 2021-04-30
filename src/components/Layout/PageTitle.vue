@@ -15,7 +15,7 @@ export default {
 <style scoped lang="less">
 h1{
 
-  font-size: 20px;
+  font-size: 23px;
   text-align: center;
   font-family: 'Comfortaa';
   line-height: 22px;

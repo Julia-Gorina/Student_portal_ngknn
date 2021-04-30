@@ -1,12 +1,9 @@
 <template>
 <div class = "Zag gradient">
-
 <PageTitle>Расписание занятий</PageTitle>
-
   <div class="specials" v-if="specials.length !== 0">
     <SpecialItem v-for="special in specials" :key="special.id" :special="special" />
   </div>
-
 </div>
 
 </template>
