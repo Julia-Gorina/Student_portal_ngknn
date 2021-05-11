@@ -1,22 +1,22 @@
 <template>
   <label :for="id">{{title}}</label>
-  <input :type="type" :id="id" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
+  <input :type="type" :id="id">
 </template>
 
 <script>
 export default {
-name: "PageInput",
+name: "IndexSelect",
   components: {},
   props:{
-  title: String,
+    title: String,
     id: String,
-    type: String,
-    modelValue: String
+    type: String
   }
 }
+
 </script>
 
-<style scoped lang="less">
+<style scoped>
 label{
   font-size:13px;
   line-height: 14px;
@@ -37,14 +37,5 @@ input{
   width: 100%;
   text-indent: 7px;
 }
-[type="date"]{
-  font-family: 'Comfortaa';
-  font-size: 13px;
-
-
-
-
-}
-
 
 </style>

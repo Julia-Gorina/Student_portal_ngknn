@@ -10,7 +10,7 @@
     },
     {
       "id": "2",
-      "time": "09:50",
+      "start_time": "08:00",
       "duration": "90",
       "subject": "ПМ.04 “Наладка оборудования“",
       "teacher": "Мухин Николай Александрович",
@@ -18,7 +18,7 @@
     },
     {
       "id": "3",
-      "time": "11:40",
+      "start_time": "11:40",
       "duration": "90",
       "subject": "ПМ.04 “Наладка оборудования“",
       "teacher": "Мухин Николай Александрович",
@@ -122,23 +122,23 @@
   "Groups": [
     {
       "id": 1,
-      "special": "Банковское дело",
+      "name": "Банковское дело",
       "groups": [
         {
           "id": 1,
-          "title": "21БД"
+          "name": "21БД"
         },
         {
           "id": 2,
-          "title": "22БД"
+          "name": "22БД"
         },
         {
           "id": 3,
-          "title": "31БД"
+          "name": "31БД"
         },
         {
           "id": 4,
-          "title": "32БД"
+          "name": "32БД"
         }
       ]
     },
@@ -557,7 +557,103 @@
         }
       ]
     }
+  ],
+  "Reference": [
+    {
+      "group": "41",
+      "fullName": "ghj",
+      "birthday": "2021-05-05",
+      "count": 1,
+      "place": "Военкомат",
+      "id": 2
+    },
+    {
+      "group": "32",
+      "fullName": "fdgfg",
+      "birthday": "2021-05-05",
+      "count": 1,
+      "place": "Пенсионный фонд",
+      "id": 3
+    },
+    {
+      "group": null,
+      "fullName": null,
+      "birthday": null,
+      "count": 1,
+      "place": "",
+      "id": 4
+    },
+    {
+      "group": null,
+      "fullName": null,
+      "birthday": null,
+      "count": 1,
+      "place": "",
+      "id": 5
+    },
+    {
+      "group": null,
+      "fullName": null,
+      "birthday": null,
+      "count": 1,
+      "place": "",
+      "id": 6
+    },
+    {
+      "group": null,
+      "fullName": null,
+      "birthday": null,
+      "count": 1,
+      "place": "",
+      "id": 7
+    },
+    {
+      "group": "hjgghjh",
+      "fullName": "",
+      "birthday": "",
+      "count": 1,
+      "place": "",
+      "id": 8
+    },
+    {
+      "group": "123",
+      "fullName": "",
+      "birthday": "",
+      "count": 1,
+      "place": "",
+      "id": 9
+    },
+    {
+      "group": "41П",
+      "fullName": "",
+      "birthday": "",
+      "count": 1,
+      "place": "",
+      "id": 10
+    },
+    {
+      "group": "22g",
+      "fullName": "",
+      "birthday": "",
+      "count": 1,
+      "place": "",
+      "id": 11
+    },
+    {
+      "group": "22g",
+      "fullName": "",
+      "birthday": "",
+      "count": 1,
+      "place": "",
+      "id": 12
+    },
+    {
+      "group": "22g",
+      "fullName": "",
+      "birthday": "",
+      "count": 1,
+      "place": "Пенсионный фонд",
+      "id": 13
+    }
   ]
-
-
 }

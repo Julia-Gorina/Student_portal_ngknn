@@ -25,12 +25,15 @@ name: "Department",
   return{
     groups: [],
     name: '',
-    statusView: 'list'
+    statusView: null
   }
   },
   methods: {
     async getGroups() {
-      let data = (await axios.get(this.$store.getters.getServer+'/api/specialties/' + this.$route.params.id + '/')).data;
+      //Prod version
+      // let data = (await axios.get(this.$store.getters.getServer+'/Special/' + this.$route.params.id + '/')).data;
+      //Dev version
+      let data = (await axios.get(this.$store.getters.getServer+'/Groups/' + this.$route.params.id + '/')).data;
       this.groups = data.groups;
       this.name = data.name;
     },
@@ -40,6 +43,7 @@ name: "Department",
   },
   mounted() {
     this.getGroups()
+    this.statusView = this.$store.getters.getViewStatus;
   }
 }
 </script>

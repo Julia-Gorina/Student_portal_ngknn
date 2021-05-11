@@ -37,11 +37,11 @@ export default {
     Lesson, Pause, Loading, MainHeader, NumberOfPairs, DateAndWeek
   },
   methods: {
-    async getLesson() {
-      let lessons = (await axios.get(this.$store.getters.getServer+'/api/lessons/')).data;
+    async getLesson(day = '') {
+      let lessons = (await axios.get(this.$store.getters.getServer+'/lesson/' + day )).data;
       let newLesson = [];
       lessons.forEach(element => {
-        let index = newLesson.findIndex(el=> el.time == element.time )
+        let index = newLesson.findIndex(el=> el.time == element.start_time )
         if(index === -1){
           newLesson.push({
             time: element.start_time,

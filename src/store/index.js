@@ -2,10 +2,13 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    server: "http://192.168.100.20:8000"
-
+    server: "http://localhost:3000",
+    viewStatus: 'list'
   },
   mutations: {
+    changeView(state, view){
+      state.viewStatus = view
+    }
   },
   actions: {
   },
@@ -14,6 +17,9 @@ export default createStore({
   getters:{
     getServer: (state) => {
       return state.server
+    },
+    getViewStatus: state => {
+      return state.viewStatus
     }
   }
 })

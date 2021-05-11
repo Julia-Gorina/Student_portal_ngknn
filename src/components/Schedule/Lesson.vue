@@ -5,8 +5,8 @@
         {{ timeLesson() }}
       </div>
     </header>
-    <div v-for="item in lesson.lessons" :key="item.id">
-      <hr>
+    <div v-for="(item, index) in lesson.lessons" :key="item.id">
+      <hr v-if="index">
       <strong>{{ item.change ? 'Замена' : ''}}</strong>
       <div class="lesson__title">
         {{ item.subject }}
@@ -173,5 +173,12 @@ export default {
 
   }
 }
+hr{
+  border: 1px solid #D13918;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-<button name="vvod" :id="id">{{title}}</button>
+<button class="vvod" :id="id">{{title}}</button>
 </template>
 
 <script>
@@ -12,7 +12,7 @@ name: "Button",
 }
 </script>
 
-<style scoped lang="less">
+<style scoped>
 button{
   background: #F2A35A;
   border-radius: 10px;
@@ -24,7 +24,8 @@ button{
   font-family: 'Comfortaa';
   text-transform: uppercase;
   color: #FFFFFF;
-
+}
+.vvod {
 
 }
 </style>

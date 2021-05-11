@@ -1,7 +1,7 @@
 <template>
   <div class="btnContainer">
-    <button @click="changeView('list')"  ref="list" ><img src="/img/Otdel/line.svg"  alt="" class="firstImage"></button>
-    <button @click="changeView('grid')" ref="grid"  ><img src="/img/Otdel/sq.svg" alt="" class="firstImage"></button>
+    <button @click="changeView('list')"  ref="list" ><img src="/img/Otdel/line.svg"  alt="" class="firstImage" :class="view =='list'? 'active': ''"></button>
+    <button @click="changeView('grid')" ref="grid"  ><img src="/img/Otdel/sq.svg" alt="" class="firstImage" :class="view =='grid'? 'active': ''"></button>
   </div>
 </template>
 
@@ -12,23 +12,18 @@ export default {
   name: "RepresData",
   data() {
     return{
-
+      view: null
     }
   },
   emits: ['changeView'],
+  mounted() {
+    this.view = this.$store.getters.getViewStatus
+  },
   methods: {
     changeView(view) {
-      this.$refs['grid' ].style.backgroundColor = 'transparent'
-      this.$refs['list' ].style.backgroundColor = 'transparent'
-      this.$refs[view].style.backgroundColor = '#D13918'
-      this.$emit('changeView', view);
-
-      // if (view !== 'list') {
-      //   this.CSSStyleSheet("button").backgroundColor(black);
-      // }
-      // else {
-      //   this.CSSStyleSheet("button").backgroundColor(red);
-      // }
+      this.$store.commit('changeView', view);
+      this.view = this.$store.getters.getViewStatus;
+      this.$emit('changeView', this.view)
     },
   }
 }
@@ -47,6 +42,11 @@ button{
 .btnContainer{
 
 }
+
+.active{
+  background-color: #D13918;
+}
+
 .firstImage{
   height: 30px;
 }
