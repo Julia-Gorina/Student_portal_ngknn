@@ -1,34 +1,31 @@
 <template>
+  <div v-if="show" id="popup" class="popup">
+    <div class="popup_body">
+      <div class="popup_content">
+        <button class="popup_close" @click="closeModal" ><img src="/img/Popup/popUp.svg"></button>
+        <div><img src="/img/Popup/sleeping.svg" class="popUpimg"></div>
+        <div class="popup_title">Кажется сервер пока спит,ваша заявка будет обработана позднее</div>
 
-<div v-if="show" id="popup" class="popup">
-  <div class="popup_body">
-    <div class="popup_content">
-      <button class="popup_close" @click="closeModal" ><img src="/img/Popup/popUp.svg"></button>
-      <div class="popup_title">Спасибо, ваша заявка принята</div>
-      <button @click="closeModal" class="popup_button">Вернуться на форму</button>
+        <button @click="closeModal" class="popup_button">Вернуться на форму</button>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
-
 export default {
-name: "Popup",
+  name: "PopupError",
   data(){
-  return{
-    show: true,
-    carthover: false
-  }
+    return{
+      show: true
+    }
   },
   methods: {
-  closeModal() {
-    this.show = false
+    closeModal() {
+      this.show = false
 
+    }
   }
-
-  }
-
 }
 </script>
 
@@ -41,9 +38,11 @@ name: "Popup",
   top:0;
   left:0;
 
-
 }
-
+.popup:target{
+  opacity: 1;
+  visibility: visible;
+}
 .popup_body{
   min-height: 100%;
   display: flex;
@@ -59,10 +58,9 @@ name: "Popup",
   padding: 30px;
   position: relative;
   text-align: center;
-
 }
 .popup_title{
-  font-size: 25px;
+  font-size: 15px;
   margin: 7px 0px 1em 0px;
   text-align: center;
 }
@@ -85,9 +83,9 @@ name: "Popup",
   font-family: 'Comfortaa';
   text-transform: uppercase;
   color: #FFFFFF;
-
-
 }
-
+.popUpimg{
+  height: 50px;
+}
 
 </style>

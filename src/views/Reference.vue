@@ -1,13 +1,17 @@
 <template>
   <div class = "Sprav grad">
-    <popup v-if="popup"></popup>
     <div class="sp">
+      <loading-popup v-if="loading"></loading-popup>
+      <PopupError v-if="error"></PopupError>
+      <popup v-if="popup"></popup>
       <SpravTitle>Оформление справки учащиегося</SpravTitle>
       <p class="sp__subtitle">Чтобы заказать справку учащиегося, заполните пожалуйста поля, которые представлены ниже</p>
       <PageInput  title="Введите группу:"  id="firstName" type="text" v-model="reference.group"/>
-      <span v-if="errorReference.group">Поле с ошибкой</span>
+      <span v-if="errorReference.group">Поле оформлено не верно</span>
       <PageInput title="Введите ФИО:" id="twoName" type="text" v-model="reference.fullName"/>
+      <span v-if="errorReference.fullName">Поле оформлено не верно</span>
       <PageInput title="Введите дату рождения:" id="threeName" type="date" v-model="reference.birthday" />
+      <span v-if="errorReference.birthday">Поле оформлено не верно</span>
       <PageInput title="Введите количество справок:" id="fourName" type="number" v-model="reference.count" />
       <Select title="Выберите место требования:"
               id="fiveName"
@@ -15,10 +19,11 @@
               v-model="reference.place"
               defaultText="Выберите место требования"
       />
+      <span v-if="errorReference.place">Поле оформлено не верно</span>
       <div class="text-center" >
         <Button title="Оформить заявку" id="sprav" @click="postReference"/>
       </div>
-      <div v-if="loading">Загрузка</div>
+
     </div>
   </div>
 
@@ -33,11 +38,13 @@ import Select from "@/components/Layout/Select";
 import Button from "@/components/Layout/Button";
 import axios from "axios";
 import Popup from "@/components/Layout/Popup";
+import PopupError from "../components/Layout/PopupError";
+import LoadingPopup from "../components/Layout/loadingPopup";
 
 
 export default {
   name: "reference",
-  components: {Popup, Button, Select, PageInput, SpravTitle},
+  components: {LoadingPopup, PopupError, Popup, Button, Select, PageInput, SpravTitle},
   data(){
     return{
       options: [
@@ -45,7 +52,7 @@ export default {
       ],
       date: '',
       popup: false,
-      error: null,
+      error: false,
       errorReference: {
         group: false,
         fullName: false,
@@ -79,13 +86,17 @@ export default {
         this.errorReference.group = true;
         countErrors++;
       }
-
+      if (this.reference.fullName.length<1) {
+        this.errorReference.fullName = true;
+        countErrors++;
+      }
 
       if (countErrors > 0 ){
         return true
       } else  {
         return false
       }
+
 
     },
     async postReference() {
@@ -103,10 +114,10 @@ export default {
           }
         }
         catch (e) {
-          this.popup = true;
+
           this.loading = false
           if (e.message == "Network Error") {
-            this.error = "В данный момент у Вас нет Интернета";
+            this.error = true;
           }
         }
 
@@ -144,6 +155,10 @@ export default {
     text-align: center;
     padding-right: 10px;
   }
+}
+span{
+  font-size: 12px;
+  color: #D13918;
 }
 
 
