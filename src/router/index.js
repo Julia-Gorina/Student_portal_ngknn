@@ -4,6 +4,7 @@ import Reference from "@/views/Reference";
 import Schedule from "@/views/Schedule";
 import Sections from "@/views/Sections";
 import Department from "@/views/Department";
+import FullSchedule from "@/views/FullSchedule";
 
 const routes = [
   {
@@ -35,6 +36,11 @@ const routes = [
     component: Sections
   }
   ,
+  {
+    path: '/FullSchedule',
+    name: 'FullSchedule',
+    component: FullSchedule
+  },
   {
     path: '/department/:id',
     name: 'Department',

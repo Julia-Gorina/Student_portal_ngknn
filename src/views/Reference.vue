@@ -2,17 +2,18 @@
   <div class = "Sprav grad">
     <div class="sp">
       <loading-popup v-if="loading"></loading-popup>
-      <PopupError v-if="error"></PopupError>
-      <popup v-if="popup"></popup>
+      <PopupError @close="error=false" v-if="error"></PopupError>
+      <popup @close="popup=false" v-if="popup"></popup>
       <SpravTitle>Оформление справки учащиегося</SpravTitle>
       <p class="sp__subtitle">Чтобы заказать справку учащиегося, заполните пожалуйста поля, которые представлены ниже</p>
-      <PageInput  title="Введите группу:"  id="firstName" type="text" v-model="reference.group"/>
+      <PageInput  title="Введите группу:"  id="firstName" type="text" v-model.trim="reference.group"/>
       <span v-if="errorReference.group">Поле оформлено не верно</span>
-      <PageInput title="Введите ФИО:" id="twoName" type="text" v-model="reference.fullName"/>
+      <PageInput title="Введите ФИО:" id="twoName" type="text" v-model.trim="reference.fullName"/>
       <span v-if="errorReference.fullName">Поле оформлено не верно</span>
       <PageInput title="Введите дату рождения:" id="threeName" type="date" v-model="reference.birthday" />
       <span v-if="errorReference.birthday">Поле оформлено не верно</span>
-      <PageInput title="Введите количество справок:" id="fourName" type="number" v-model="reference.count" />
+      <PageInput title="Введите количество справок:" id="fourName"  type="number" v-model.number.trim="reference.count" />
+      <span v-if="errorReference.count">Поле оформлено не верно</span>
       <Select title="Выберите место требования:"
               id="fiveName"
               :options="options"
@@ -86,10 +87,24 @@ export default {
         this.errorReference.group = true;
         countErrors++;
       }
-      if (this.reference.fullName.length<1) {
+      if (this.reference.fullName.length<1 ) {
         this.errorReference.fullName = true;
         countErrors++;
       }
+      if (this.reference.birthday.length < 1) {
+        this.errorReference.birthday = true;
+        countErrors++;
+      }
+      if (+this.reference.count < 1) {
+        this.errorReference.count = true;
+        countErrors++;
+      }
+      if (this.reference.place.length < 1) {
+        this.errorReference.place = true;
+        countErrors++;
+      }
+
+
 
       if (countErrors > 0 ){
         return true
@@ -110,7 +125,14 @@ export default {
           this.responce = (await axios.post(this.$store.getters.getServer + '/Reference', this.reference));
           if (this.responce.status === 201){
             this.popup = true;
-            this.loading = false
+            this.loading = false;
+            this.reference= {
+              group: '',
+                  fullName: '',
+                  birthday: '',
+                  count: 1,
+                  place: ''
+            }
           }
         }
         catch (e) {

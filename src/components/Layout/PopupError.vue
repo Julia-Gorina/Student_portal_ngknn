@@ -1,11 +1,10 @@
 <template>
-  <div v-if="show" id="popup" class="popup">
+  <div  id="popup" class="popup">
     <div class="popup_body">
       <div class="popup_content">
         <button class="popup_close" @click="closeModal" ><img src="/img/Popup/popUp.svg"></button>
         <div><img src="/img/Popup/sleeping.svg" class="popUpimg"></div>
         <div class="popup_title">Кажется сервер пока спит,ваша заявка будет обработана позднее</div>
-
         <button @click="closeModal" class="popup_button">Вернуться на форму</button>
       </div>
     </div>
@@ -17,12 +16,12 @@ export default {
   name: "PopupError",
   data(){
     return{
-      show: true
+
     }
   },
   methods: {
     closeModal() {
-      this.show = false
+      this.$emit('close')
 
     }
   }
