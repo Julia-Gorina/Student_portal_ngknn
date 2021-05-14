@@ -33,7 +33,7 @@ name: "Department",
       //Prod version
       // let data = (await axios.get(this.$store.getters.getServer+'/Special/' + this.$route.params.id + '/')).data;
       //Dev version
-      let data = (await axios.get(this.$store.getters.getServer+'/Groups/' + this.$route.params.id + '/')).data;
+      let data = (await axios.get(this.$store.getters.getServer+'/api/specialties/' + this.$route.params.id + '/')).data;
       this.groups = data.groups;
       this.name = data.name;
     },

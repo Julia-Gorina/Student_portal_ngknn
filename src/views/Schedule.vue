@@ -26,7 +26,7 @@ name: "Schedule",
   },
   methods:{
     async getSpecial() {
-      this.specials = (await axios.get(this.$store.getters.getServer+'/Special')).data;
+      this.specials = (await axios.get(this.$store.getters.getServer+'/api/specialties/')).data;
     }
   },
   mounted(){

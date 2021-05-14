@@ -31,6 +31,7 @@ export default {
     return {
       lessons: [],
       loading: true,
+      isTop: null
     }
   },
   components: {
@@ -38,10 +39,11 @@ export default {
   },
   methods: {
     async getLesson(day = '') {
-      let lessons = (await axios.get(this.$store.getters.getServer+'/lesson/' + day )).data;
+      let lessons = (await axios.get(this.$store.getters.getServer+'/api/lessons/' + day )).data;
       let newLesson = [];
+      lessons = lessons.filter(el=> el.is_top === this.isTop || el.is_top === null);
       lessons.forEach(element => {
-        let index = newLesson.findIndex(el=> el.time == element.start_time )
+        let index = newLesson.findIndex(el=> el.time == element.start_time && (el.is_top === element.is_top || el.is_top === null)  )
         if(index === -1){
           newLesson.push({
             time: element.start_time,
@@ -68,10 +70,21 @@ export default {
       });
       this.lessons = newLesson;
         this.loading = false;
+    },
+    week(){
+      this.date=new Date();
+      let year = this.date.getFullYear();
+      let begin = this.date.getMonth() > 8 ? new Date(`${year}-09-01T00:00`) : new Date(`${year}-01-01T00:00`)
+      let dayWeek = begin.getDay();
+      let week = Math.ceil((((this.date - begin) / 1000 / 60 / 60 / 24 + dayWeek-1  ) / 7));
+      week = week%2 !== 0 ? 0 : 1;
+      return Boolean(week)
     }
   },
+
   mounted() {
-    this.getLesson()
+    this.getLesson();
+    this.isTop = this.week()
   }
 }
 </script>

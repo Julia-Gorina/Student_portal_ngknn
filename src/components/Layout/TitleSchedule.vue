@@ -21,7 +21,6 @@ h1 {
   text-align: center;
   line-height: 22px;
   margin-bottom: 5px;
-  padding-top: 30px;
   color: #FFFFFF;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

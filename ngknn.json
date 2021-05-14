@@ -2,28 +2,55 @@
   "lesson": [
     {
       "id": "1",
+      "week_day": 1,
       "start_time": "08:00",
       "duration": "90",
-      "subject": "ПМ.04 “Наладка оборудования“",
+      "subject": "ПМ.04 “Наладка оборудования“(true)",
       "teacher": "Мухин Николай Александрович",
-      "classroom": "105 каб."
+      "classroom": "105 каб.",
+      "is_top": true
     },
     {
       "id": "2",
+      "week_day": 1,
       "start_time": "08:00",
       "duration": "90",
-      "subject": "ПМ.04 “Наладка оборудования“",
+      "subject": " Ин_яз(false)",
       "teacher": "Мухин Николай Александрович",
-      "classroom": "105 каб."
+      "classroom": "105 каб.",
+      "is_top": false
     },
     {
       "id": "3",
+      "week_day": 1,
       "start_time": "11:40",
       "duration": "90",
-      "subject": "ПМ.04 “Наладка оборудования“",
+      "subject": "Физ-ра(null)",
       "teacher": "Мухин Николай Александрович",
-      "classroom": "105 каб."
+      "classroom": "105 каб.",
+      "is_top": null
+    },
+    {
+      "id": "2",
+      "week_day": 2,
+      "start_time": "08:00",
+      "duration": "90",
+      "subject": "Право(false)“",
+      "teacher": "Мухин Николай Александрович",
+      "classroom": "105 каб.",
+      "is_top": false
+    },
+    {
+      "id": "4",
+      "week_day": 2,
+      "start_time": "09:50",
+      "duration": "90",
+      "subject": "ПМ.04 “Наладка оборудования“(null)",
+      "teacher": "Мухин Николай Александрович",
+      "classroom": "105 каб.",
+      "is_top": null
     }
+
   ],
   "Special": [
     {

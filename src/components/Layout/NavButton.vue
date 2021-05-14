@@ -1,6 +1,6 @@
 <template>
 <div class="spisok">
- <button :id="id" class="btn">{{title}}</button>
+ <button :idDay="idDay"  @click="selectDay(idDay)" class="btn " :class="{active:active}">{{title}}</button>
 </div>
 </template>
 
@@ -9,8 +9,14 @@ export default {
 name: "NavButton",
   props:{
     title: String,
-    id: String,
-    modelValue: String
+    idDay: Number,
+    modelValue: String,
+    active: Boolean
+  },
+  methods:{
+  selectDay(id){
+    this.$emit("selectDay",id)
+  }
   }
 }
 </script>
@@ -21,7 +27,6 @@ name: "NavButton",
 
 }
 .btn{
-
   background: transparent;
   outline: none;
   border: 1.5px solid #FFFFFF;
@@ -37,6 +42,14 @@ name: "NavButton",
   padding: 4px 4px 2px 4px;
   margin: 0px 2px 0px 2px;
 }
-
+@media screen and  (max-width: 320px){
+.btn{
+  font-size: 14px;
+}
+}
+.active{
+  background-color: white;
+  color: #D13918;
+}
 
 </style>

@@ -21,9 +21,11 @@
               defaultText="Выберите место требования"
       />
       <span v-if="errorReference.place">Поле оформлено не верно</span>
+      <PageInput title="Введите название района:" v-if="reference.place === 'Военкомат'" id="dopInfo" v-model.trim="reference.dopInfo"></PageInput>
       <div class="text-center" >
         <Button title="Оформить заявку" id="sprav" @click="postReference"/>
       </div>
+
 
     </div>
   </div>
@@ -60,13 +62,15 @@ export default {
         birthday: false,
         count: false,
         place: false,
+        dopInfo: false,
       },
       reference: {
         group: '',
         fullName: '',
         birthday: '',
         count: 1,
-        place: ''
+        place: '',
+        dopInfo: ''
       },
       responce: null,
       loading: false

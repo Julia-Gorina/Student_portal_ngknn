@@ -1,6 +1,6 @@
 <template>
 <div class="block">
-<blockLesson></blockLesson>
+<blockLesson v-for="lesson in lessons" :key="lesson.id" :lesson="lesson"></blockLesson>
 </div>
 </template>
 
@@ -8,7 +8,10 @@
 import BlockLesson from "@/components/Layout/BLockLesson";
 export default {
 name: "BlockSchedule",
-  components: {BlockLesson}
+  components: {BlockLesson},
+  props: {
+    lessons: Array
+  }
 }
 </script>
 

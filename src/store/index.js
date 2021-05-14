@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    server: "http://localhost:3000",
+    server: "http://abna.ngknn.ru:8001",
     viewStatus: 'list'
   },
   mutations: {
