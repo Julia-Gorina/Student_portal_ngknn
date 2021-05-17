@@ -19,11 +19,14 @@ h1{
   font-weight: bold;
   text-align: center;
   font-family: 'Comfortaa';
-  line-height: 22px;
+  line-height: 1.25em;
   margin-bottom: 5px;
   padding-top: 30px;
   color: #000000;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  @media screen and (min-width: 750px){
+    font-size: 24px;
+  }
 
   &::after{
     content: "";

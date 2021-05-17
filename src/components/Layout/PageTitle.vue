@@ -32,9 +32,6 @@ h1{
     background-color: #D13918;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.30);
     margin-top: 5px;
-
-
-
   }
 }
 </style>

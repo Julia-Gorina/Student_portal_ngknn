@@ -1,26 +1,31 @@
 <template>
-<div class="group">
-  <router-link to="#" class="link">
-    {{group.name}}
-  </router-link>
-</div>
+  <div class="group">
+    <router-link :to="'/fullschedule/' + group.id " class="link">
+      {{ group.name }}
+    </router-link>
+  </div>
 </template>
 
 <script>
 export default {
-name: "GroupItem",
+  name: "GroupItem",
   props: {
-  group: Object
+    group: Object
+  },
+  data(){
+    return{
+
+    }
   }
 }
 </script>
 
 <style scoped>
-.group{
- /*top: 100px;*/
+.group {
+  /*top: 100px;*/
 }
 
-.list{
+.list {
   text-align: center;
   margin-top: 10px;
   background: #F9C474;
@@ -37,12 +42,13 @@ name: "GroupItem",
   padding-right: 15px;
   padding-left: 15px;
 }
-#square{
+
+#square {
   width: 100px;
   height: 100px;
 }
 
-.grid .link{
+.grid .link {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,7 +62,8 @@ name: "GroupItem",
   width: 100%;
   height: 100%;
 }
-.list .link{
+
+.list .link {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,20 +76,21 @@ name: "GroupItem",
   width: 100%;
   height: 100%;
 }
-@media screen and  (max-width: 1170px){
-  .grid{
+
+@media screen and  (max-width: 1170px) {
+  .grid {
     width: 25%;
   }
 }
 
-@media screen and  (max-width: 768px){
-  .grid{
+@media screen and  (max-width: 768px) {
+  .grid {
     width: 33%;
   }
 }
 
-@media screen and  (max-width: 520px){
-  .grid{
+@media screen and  (max-width: 520px) {
+  .grid {
     width: 50%;
   }
 }

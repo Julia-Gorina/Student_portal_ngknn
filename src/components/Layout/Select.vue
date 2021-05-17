@@ -33,6 +33,10 @@ select {
   margin-top: 10px;
   height: 27px;
   color: #000000;
+  @media screen and (min-width: 700px){
+      font-size:18px;
+    height: 35px;
+    }
 }
 
 
@@ -42,9 +46,11 @@ label {
   color: #000000;
   text-align: left;
   margin-top: 20px;
-
   display: flex;
   flex-direction: column;
+  @media screen and (min-width: 700px){
+    font-size:18px;
+  }
 }
 
 </style>

@@ -36,8 +36,12 @@ a{
 .special__name{
   text-align: center;
   font-size: 12px;
-  line-height: 13px;
+  line-height: 1.25em;
 
 }
-
+@media screen and (min-width: 750px) {
+.special__name{
+  font-size: 18px;
+}
+}
 </style>

@@ -38,9 +38,7 @@ name: "BLockLesson",
   margin-right: 7px;
   border-bottom: 1px solid white;
   padding-bottom: 5px;
-  &:not(:first-child){
-    border-bottom: none;
-  }
+
 
   &_time{
     flex: 0 0 18%;

@@ -136,26 +136,50 @@ export default {
   }
   &__title{
     font-size: 16px;
-    line-height: 17px;
+    line-height: 1.25em;
     color: #000000;
     padding: 5px 0;
+
+    @media screen and (min-width: 700px){
+      font-size: 24px;
+    }
+
 
   }
   &__time{
     font-size: 17px;
-    line-height: 17px;
+    line-height: 1.25em;
     color: #000000;
     font-weight: bold;
+    @media screen and (min-width: 1000px){
+      font-size: 24px;
+    }
+    @media screen and (min-width: 700px){
+      font-size: 24px;
+    }
+
   }
   &__teacher{
     font-size: 12px;
-    line-height: 12px;
+    line-height: 1.25em;
     margin:  0 0 6px;
+    @media screen and (min-width: 1000px){
+      font-size: 22px;
+    }
+    @media screen and (min-width: 700px){
+      font-size: 19px;
+    }
   }
 
   &__office{
     font-size: 12px;
-    line-height: 13px;
+    line-height: 1.25em;
+    @media screen and (min-width: 1000px){
+      font-size: 24px;
+    }
+    @media screen and (min-width: 700px){
+      font-size: 20px;
+    }
   }
 
   &_active{

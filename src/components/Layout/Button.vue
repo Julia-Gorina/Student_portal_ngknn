@@ -23,6 +23,11 @@ button{
   font-family: 'Comfortaa';
   text-transform: uppercase;
   color: #FFFFFF;
-}
 
+}
+@media screen and (min-width: 750px){
+button{
+  font-size: 15px;
+}
+}
 </style>

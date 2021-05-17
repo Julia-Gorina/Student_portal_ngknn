@@ -2,7 +2,7 @@
   <div class="nav">
     <NavItem to="/" img="img/layout/nav/house.svg" title="Главная" class="menu"/>
     <NavItem to="/schedule" img="img/layout/nav/raspi.svg" title="Расписание" class="menu" />
-    <NavItem to="/fullschedule" img="img/layout/nav/section.svg" title="Кружки и секции" class="menu" />
+    <NavItem to="/sections" img="img/layout/nav/section.svg" title="Кружки и секции" class="menu" />
     <NavItem to="/reference" img="img/layout/nav/sprav.svg" title="Заказ справки" class="menu"/>
   </div>
 </template>
@@ -34,5 +34,8 @@ export default {
   font-size:9px;
   color: #000000;
   text-decoration: none;
+}
+@media screen and (min-width: 1000px) {
+
 }
 </style>

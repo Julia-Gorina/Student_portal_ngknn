@@ -6,7 +6,7 @@
     </div>
     <NewTitle > {{ name }}</NewTitle>
     <div class="groups-list">
-      <GroupItem v-for="group in groups" :key="group.id" :group="group" :class="statusView"/>
+      <GroupItem v-for="group in groups" :key="group.id" :group="group" :class="statusView" />
     </div>
   </div>
 </template>
@@ -59,6 +59,8 @@ name: "Department",
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
+
 }
+
 
 </style>

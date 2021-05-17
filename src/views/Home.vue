@@ -3,7 +3,7 @@
     <MainHeader>Доброе утро!</MainHeader>
     <NumberOfPairs :lessons="lessons" />
 
-    <img src="img/layout/header/glav.jpg" alt="" class="home-img">
+    <img src="img/layout/header/123.jpg" alt="" class="home-img">
     <DateAndWeek />
     <template v-for="(lesson, index) in lessons" :key="lesson.id">
       <Lesson :lesson="lesson" :prevLesson="lessons[index-1]"/>
@@ -38,8 +38,13 @@ export default {
     Lesson, Pause, Loading, MainHeader, NumberOfPairs, DateAndWeek
   },
   methods: {
-    async getLesson(day = '') {
-      let lessons = (await axios.get(this.$store.getters.getServer+'/api/lessons/' + day )).data;
+    getDateString(){
+      let date = (new Date).toLocaleDateString().split('.');
+      date = [].concat(date[2], date[1], date[0]).join('-');
+      return date;
+    },
+    async getLesson(date = this.getDateString()) {
+      let lessons = (await axios.get(this.$store.getters.getServer+ '/api/lessons_with_changes/1/' + date + '/')).data.lessons;
       let newLesson = [];
       lessons = lessons.filter(el=> el.is_top === this.isTop || el.is_top === null);
       lessons.forEach(element => {
@@ -95,7 +100,9 @@ export default {
 }
 
 .home-img{
-  max-width: 100%;
+width: 100%;
+  padding-top: 4px;
+
 
 }
 
@@ -106,5 +113,10 @@ export default {
 .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */
 {
   opacity: 0;
+}
+@media screen and (min-width: 1000px){
+  template{
+    font-size: 24px;
+  }
 }
 </style>

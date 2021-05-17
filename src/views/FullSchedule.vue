@@ -2,7 +2,7 @@
   <div class="schedule grad">
     <div class="header">
       <Arrow></Arrow>
-      <title-schedule class="title">Расписание занятий группы 41П</title-schedule>
+      <title-schedule class="title">Расписание занятий группы {{ group }}</title-schedule>
     </div>
     <div class="v-btn">
       <nav-button v-for="day in days"
@@ -38,12 +38,16 @@ import axios from "axios";
 export default {
   name: "FullSchedule",
   components: {NavButton, TitleSchedule, Arrow, DayLesson},
+  props: {
+    id: String
+  },
   methods: {
     selectDay(id) {
       this.currentDay = this.days.find(el => el.id === id);
     },
     async getScheule() {
-      let lessons = (await axios.get(this.$store.getters.getServer + '/lesson/')).data;
+      let lessons = (await axios.get(this.$store.getters.getServer + '/api/lessons/' + this.id + '/')).data;
+      this.group = lessons[0].group;
       let newLesson = [];
       lessons.forEach(element => {
         let index = newLesson.findIndex(el => el.time == element.start_time && el.week_day === element.week_day && (el.is_top === element.is_top || el.is_top === null))
@@ -96,12 +100,14 @@ export default {
   },
   data() {
     return {
+      path: this.$store.getters.getServer+'/api/lessons/',
       currentDay: {
         id: 0,
         title: 'Общее',
         subTitle: 'Общее'
       },
       isTop: null,
+      group: null,
       lessons: [],
       date: null,
       days: [

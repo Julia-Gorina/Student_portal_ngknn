@@ -55,6 +55,31 @@ export default {
     line-height: 12px;
     text-transform: uppercase;
     padding-right: 11px ;
+    @media screen and (min-width: 750px){
+      font-size: 17px;
+    }
+    @media screen and (min-width: 1000px){
+        font-size: 24px;
+
+    }
+
+  }
+}
+@media screen and (max-width: 280px){
+  .date-and-week{
+    font-size: 11px;
+  }
+}
+@media screen and (min-width: 750px){
+  .date-and-week{
+    font-size: 24px;
+
+  }
+}
+@media screen and (min-width: 1000px){
+  .date-and-week{
+    font-size: 37px;
+    margin-top: 10px;
 
   }
 }

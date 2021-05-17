@@ -37,9 +37,10 @@ const routes = [
   }
   ,
   {
-    path: '/FullSchedule',
+    path: '/fullschedule/:id',
     name: 'FullSchedule',
-    component: FullSchedule
+    component: FullSchedule,
+    props: true
   },
   {
     path: '/department/:id',

@@ -177,9 +177,12 @@ export default {
   &__subtitle{
     padding-top: 5px;
     font-size: 13px;
-    line-height: 14px;
+    line-height: 1.25em;
     text-align: center;
     padding-right: 10px;
+    @media screen and (min-width: 750px){
+      font-size: 17px;
+    }
   }
 }
 span{
