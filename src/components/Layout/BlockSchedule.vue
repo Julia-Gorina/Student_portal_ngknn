@@ -15,12 +15,14 @@ name: "BlockSchedule",
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .block{
   background: #000000;
   border-radius: 6px;
   width: 100%;
-
   margin-top: 15px;
+  .lesson:last-child{
+    border-bottom: none;
+  }
 }
 </style>

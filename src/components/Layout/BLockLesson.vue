@@ -1,7 +1,7 @@
 <template>
   <div class="lesson">
     <div class="lesson_time">
-      {{ lesson.time }}
+      {{ lesson.time.split(':').splice(0,2).join(':') }}
     </div>
     <div class="lesson_info">
       <div class="lesson_item" v-for="item in lesson.lessons" :key="item.id">

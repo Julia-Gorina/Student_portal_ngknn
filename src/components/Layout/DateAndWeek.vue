@@ -12,11 +12,24 @@
 <script>
 export default {
   name: "DateAndWeek",
+  props: {
+    day: Boolean
+  },
   data() {
     return {
       date: new Date(),
       month: ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Сентября','Октября', 'Ноября','Декабря'],
       WeekText: ['Понедельник', 'Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье']
+    }
+  },
+  watch: {
+    day(){
+      if (this.day) {
+        this.date = new Date()
+      } else {
+        this.date = new Date();
+        this.date.setDate(new Date().getDate()+1);
+      }
     }
   },
   methods:{
@@ -31,7 +44,11 @@ export default {
     }
   },
   mounted() {
-    this.date = new Date()
+    if (this.day) {
+      this.date = new Date()
+    } else {
+      this.date = new Date('2021-05-17')
+    }
   }
 }
 </script>

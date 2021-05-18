@@ -63,11 +63,11 @@ export default {
 
   },
   mounted() {
-    // this.startLessonOne = new Date(`${this.lesson[0].date}T${this.lesson[0].time}`);
+
     this.startLessonOne = this.getMinut(this.lesson[0].time)
-    // this.endLessonOne = new Date(+(this.startLessonOne) + this.lesson[0].duration * 60 * 1000);
+
     this.endLessonOne = this.getMinut(this.lesson[0].time) + +this.lesson[0].duration;
-    // this.startLessonTwo = new Date(`${this.lesson[1].date}T${this.lesson[1].time}`);
+
     this.startLessonTwo = this.getMinut(this.lesson[1].time);
     this.now = this.getMinut(new Date().toLocaleTimeString());
 

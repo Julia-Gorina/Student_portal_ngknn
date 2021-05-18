@@ -81,7 +81,7 @@ export default {
       this.endLesson = this.getMinut(this.lesson.time) + +this.lesson.duration;
       let hEnd =  Math.floor(this.endLesson / 60)
       let mEnd = Math.abs(this.endLesson - hEnd * 60);
-      let str = `${this.lesson.time} - ${hEnd < 10 ? '0' + hEnd : hEnd }:${mEnd}`
+      let str = `${this.lesson.time.split(':').splice(0,2).join(':')} - ${hEnd < 10 ? '0' + hEnd : hEnd }:${mEnd}`
       return str
 
     },
@@ -124,7 +124,7 @@ export default {
     top: 0;
     left: 0;
     width: 5px;
-    height: 100% - 10px;
+    height: 100% - 5%;
     transform: translate(-2.5px, 5px);
     background-color: transparent;
     border-radius: 10px;

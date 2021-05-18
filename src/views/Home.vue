@@ -1,10 +1,12 @@
 <template>
   <div class="home">
     <MainHeader>Доброе утро!</MainHeader>
-    <NumberOfPairs :lessons="lessons" />
-
+    <div class="navBar">
+    <NumberOfPairs :lessons="lessons" :day="today" />
+    <next-day  @click="toggleDay" :title="today ? 'Завтра': 'Сегодня'"></next-day>
+    </div>
     <img src="img/layout/header/123.jpg" alt="" class="home-img">
-    <DateAndWeek />
+    <DateAndWeek :day="today" />
     <template v-for="(lesson, index) in lessons" :key="lesson.id">
       <Lesson :lesson="lesson" :prevLesson="lessons[index-1]"/>
       <Pause v-if="index !== lessons.length - 1" :lesson="[lesson ,lessons[index+1]]"/>
@@ -24,6 +26,7 @@ import Pause from '@/components/Schedule/Pause.vue'
 import Loading from '@/components/Layout/Loading.vue'
 
 import axios from 'axios'
+import NextDay from "@/components/Layout/NextDay";
 
 export default {
   name: 'Home',
@@ -31,20 +34,40 @@ export default {
     return {
       lessons: [],
       loading: true,
-      isTop: null
+      isTop: null,
+      today: true,
+      date: null,
     }
   },
+  props: {
+    day: String
+  },
   components: {
+    NextDay,
     Lesson, Pause, Loading, MainHeader, NumberOfPairs, DateAndWeek
   },
   methods: {
-    getDateString(){
-      let date = (new Date).toLocaleDateString().split('.');
-      date = [].concat(date[2], date[1], date[0]).join('-');
+    toggleDay(){
+       this.today = !this.today;
+       if (this.today){
+         this.date = new Date();
+       } else {
+         this.date.setDate(new Date().getDate()+1);
+       }
+       this.getLesson(this.date);
+    },
+    getDateString(date){
+      let dateArray =  date.toLocaleDateString().split('.'); // 18.05.2021
+      date = [].concat(dateArray[2], dateArray[1], dateArray[0]).join('-');
       return date;
     },
-    async getLesson(date = this.getDateString()) {
-      let lessons = (await axios.get(this.$store.getters.getServer+ '/api/lessons_with_changes/1/' + date + '/')).data.lessons;
+    async getLesson(date) {
+      date = this.getDateString(date);
+      let data = (await axios.get(this.$store.getters.getServer+ '/api/lessons_with_changes/1/' + date + '/')).data;
+      let lessons = data.lessons;
+      // let change = data.change;
+
+
       let newLesson = [];
       lessons = lessons.filter(el=> el.is_top === this.isTop || el.is_top === null);
       lessons.forEach(element => {
@@ -53,6 +76,7 @@ export default {
           newLesson.push({
             time: element.start_time,
             duration: element.duration,
+            is_top: element.is_top,
             lessons: [
               {
                 id: element.id,
@@ -86,11 +110,11 @@ export default {
       return Boolean(week)
     }
   },
-
   mounted() {
-    this.getLesson();
+    this.date = new Date();
+    this.getLesson(this.date);
     this.isTop = this.week()
-  }
+  },
 }
 </script>
 
@@ -118,5 +142,9 @@ width: 100%;
   template{
     font-size: 24px;
   }
+}
+.navBar{
+  display: flex;
+  justify-content: space-between;
 }
 </style>

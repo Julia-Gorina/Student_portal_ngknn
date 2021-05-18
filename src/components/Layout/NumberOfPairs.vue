@@ -1,6 +1,6 @@
 <template>
   <div class="number_of_pairs">
-    Сегодня {{ count() }} пары
+    {{ day ? 'Сегодня' : 'Завтра'}} {{ count() }} {{  count() >= 5 ? 'пар' : '' || count() % 2 ? 'пара' : 'пары' }}
   </div>
 </template>
 
@@ -8,7 +8,8 @@
 export default {
   name: "NumberOfPairs",
   props:{
-    lessons: Array
+    lessons: Array,
+    day: Boolean
   },
   methods: {
     count(){
@@ -25,7 +26,7 @@ export default {
     padding-bottom: 5px;
     font-family: 'Comfortaa';
     font-weight: normal;
-    padding-top: 0;
+    padding-top: .2em;
 
 
 

@@ -1,7 +1,7 @@
 <template>
   <div class = "section">
     <div class = "section__image">
-      <a href= "" target="_blank"><img :src="section.image" alt=""></a>
+      <a :href="section.url" target="_blank"><img :src="section.image" alt=""></a>
     </div>
     <div class = "section__name">
       {{ section.name }}

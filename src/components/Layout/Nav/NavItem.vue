@@ -1,5 +1,8 @@
 <template>
-  <router-link :to="to" class="nav-item"><img :src="img" alt=""> {{ title }} </router-link>
+  <router-link :to="to" class="nav-item" :class="active ? 'router-link-active router-link-exact-active' : ''">
+    <img :src="img" alt="">
+    {{ title }}
+  </router-link>
 </template>
 
 <script>
@@ -9,6 +12,9 @@ export default {
     to: String,
     img: String,
     title: String
+  },
+  computed:{
+    
   }
 }
 </script>
@@ -19,10 +25,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-right: 10px;
  // margin-left: 10px;
   flex-direction: column;
-
+  text-align: center;
 
   &.router-link-exact-active{
     border-bottom: 2px solid #D13918;

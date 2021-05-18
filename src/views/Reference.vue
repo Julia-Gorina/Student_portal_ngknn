@@ -4,24 +4,24 @@
       <loading-popup v-if="loading"></loading-popup>
       <PopupError @close="error=false" v-if="error"></PopupError>
       <popup @close="popup=false" v-if="popup"></popup>
-      <SpravTitle>Оформление справки учащиегося</SpravTitle>
+      <SpravTitle>Оформление справки учащегося</SpravTitle>
       <p class="sp__subtitle">Чтобы заказать справку учащиегося, заполните пожалуйста поля, которые представлены ниже</p>
       <PageInput  title="Введите группу:"  id="firstName" type="text" v-model.trim="reference.group"/>
       <span v-if="errorReference.group">Поле оформлено не верно</span>
-      <PageInput title="Введите ФИО:" id="twoName" type="text" v-model.trim="reference.fullName"/>
-      <span v-if="errorReference.fullName">Поле оформлено не верно</span>
+      <PageInput title="Введите ФИО:" id="twoName" type="text" v-model.trim="reference.student"/>
+      <span v-if="errorReference.student">Поле оформлено не верно</span>
       <PageInput title="Введите дату рождения:" id="threeName" type="date" v-model="reference.birthday" />
       <span v-if="errorReference.birthday">Поле оформлено не верно</span>
-      <PageInput title="Введите количество справок:" id="fourName"  type="number" v-model.number.trim="reference.count" />
-      <span v-if="errorReference.count">Поле оформлено не верно</span>
+      <PageInput title="Введите количество справок:" id="fourName"  type="number" v-model.number.trim="reference.quantity" />
+      <span v-if="errorReference.quantity">Поле оформлено не верно</span>
       <Select title="Выберите место требования:"
               id="fiveName"
               :options="options"
-              v-model="reference.place"
+              v-model="reference.where"
               defaultText="Выберите место требования"
       />
-      <span v-if="errorReference.place">Поле оформлено не верно</span>
-      <PageInput title="Введите название района:" v-if="reference.place === 'Военкомат'" id="dopInfo" v-model.trim="reference.dopInfo"></PageInput>
+      <span v-if="errorReference.where">Поле оформлено не верно</span>
+      <PageInput title="Введите название района:" v-if="reference.where === 'Военкомат'" id="dopInfo" v-model.trim="reference.military_commissariat"></PageInput>
       <div class="text-center" >
         <Button title="Оформить заявку" id="sprav" @click="postReference"/>
       </div>
@@ -58,19 +58,19 @@ export default {
       error: false,
       errorReference: {
         group: false,
-        fullName: false,
+        student: false,
         birthday: false,
-        count: false,
-        place: false,
-        dopInfo: false,
+        quantity: false,
+        where: false,
+        military_commissariat: false,
       },
       reference: {
         group: '',
-        fullName: '',
+        student: '',
         birthday: '',
-        count: 1,
-        place: '',
-        dopInfo: ''
+        quantity: 1,
+        where: '',
+        military_commissariat: ''
       },
       responce: null,
       loading: false
@@ -82,29 +82,29 @@ export default {
       let countErrors = 0;
       this.errorReference =  {
         group: false,
-        fullName: false,
+        student: false,
         birthday: false,
-        count: false,
-        place: false,
+        quantity: false,
+        where: false,
       }
       if (this.reference.group.length < 3) {
         this.errorReference.group = true;
         countErrors++;
       }
-      if (this.reference.fullName.length<1 ) {
-        this.errorReference.fullName = true;
+      if (this.reference.student.length<1 ) {
+        this.errorReference.student = true;
         countErrors++;
       }
       if (this.reference.birthday.length < 1) {
         this.errorReference.birthday = true;
         countErrors++;
       }
-      if (+this.reference.count < 1) {
-        this.errorReference.count = true;
+      if (+this.reference.quantity < 1) {
+        this.errorReference.quantity = true;
         countErrors++;
       }
-      if (this.reference.place.length < 1) {
-        this.errorReference.place = true;
+      if (this.reference.where.length < 1) {
+        this.errorReference.where = true;
         countErrors++;
       }
 
@@ -126,16 +126,16 @@ export default {
 
         this.loading = true;
         try {
-          this.responce = (await axios.post(this.$store.getters.getServer + '/Reference', this.reference));
+          this.responce = (await axios.post(this.$store.getters.getServer + '/api/receipts/', this.reference));
           if (this.responce.status === 201){
             this.popup = true;
             this.loading = false;
             this.reference= {
               group: '',
-                  fullName: '',
+                  student: '',
                   birthday: '',
-                  count: 1,
-                  place: ''
+                  quantity: 1,
+                  where: ''
             }
           }
         }

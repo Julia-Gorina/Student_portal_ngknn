@@ -34,6 +34,7 @@ export default {
   font-size:9px;
   color: #000000;
   text-decoration: none;
+  flex: 1 1 25%;
 }
 @media screen and (min-width: 1000px) {
 

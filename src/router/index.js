@@ -8,9 +8,10 @@ import FullSchedule from "@/views/FullSchedule";
 
 const routes = [
   {
-    path: '/',
+    path: '/:day?',
     name: 'Home',
-    component: Home
+    component: Home,
+    props: true
   },
   {
     path: '/about',
