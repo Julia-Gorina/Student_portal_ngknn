@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "json": "json-server --watch ngknn.json"
+    "json": "json-server --watch ngknn.json",
+    "buildSW": "workbox generateSW workbox-config.js"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
@@ -31,7 +32,8 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
     "less": "^3.0.4",
-    "less-loader": "^5.0.0"
+    "less-loader": "^5.0.0",
+    "workbox-cli": "^6.1.5"
   },
   "eslintConfig": {
     "root": true,
