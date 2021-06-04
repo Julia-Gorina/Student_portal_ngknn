@@ -9,7 +9,13 @@
           {{ item.subject }}
         </div>
         <div class="lesson_teacher">
-          {{ item.teacher }} {{ item.classroom }}
+          <span v-if="$route.fullPath.includes('fullschedule_teacher')">
+              Группа: {{item.group}}
+          </span>
+          <span v-else>
+             {{ item.teacher }}
+          </span>
+          Каб. {{ item.classroom }}
         </div>
       </div>
 
@@ -39,6 +45,9 @@ name: "BLockLesson",
   border-bottom: 1px solid white;
   padding-bottom: 5px;
 
+  &_info{
+    flex-grow: 1;
+  }
 
   &_time{
     flex: 0 0 18%;
@@ -71,6 +80,8 @@ name: "BLockLesson",
     font-size: 0.80em;
     padding: 4px 0;
     color: #C4C4C4;
+    display: flex;
+    justify-content: space-between;
   }
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="number_of_pairs">
-    {{ day ? 'Сегодня' : 'Завтра'}} {{ count() }} {{  count() >= 5 ? 'пар' : '' || count() % 2 ? 'пара' : 'пары' }}
+    {{ day ? 'Сегодня' : 'Завтра'}} {{ count ? count : 'нет' }} {{ pairText }}
   </div>
 </template>
 
@@ -12,8 +12,24 @@ export default {
     day: Boolean
   },
   methods: {
+
+  },
+  computed: {
     count(){
-        return this.lessons.length
+      return this.lessons.length
+    },
+    pairText(){
+      switch (this.count){
+        case 1 :
+          return 'пара'
+        case 2,3,4:
+          return 'пары'
+        default:
+          return 'пар'
+      }
+
+
+
     }
   }
 }

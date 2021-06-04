@@ -1,6 +1,6 @@
 <template>
   <label :for="id">{{title}}</label>
-  <input :type="type" :id="id" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
+  <input :type="type" :id="id" :value="modelValue" :placeholder="placeholder"   @input="$emit('update:modelValue', $event.target.value)">
 </template>
 
 <script>
@@ -11,7 +11,9 @@ name: "PageInput",
   title: String,
     id: String,
     type: String,
-    modelValue: String
+    modelValue: String,
+    placeholder: String
+
   }
 }
 </script>

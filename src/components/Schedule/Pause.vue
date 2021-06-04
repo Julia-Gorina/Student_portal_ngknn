@@ -29,7 +29,8 @@ export default {
     }
   },
   props: {
-    lesson: Array
+    lesson: Array,
+    today: Boolean
   },
   computed: {
     pauseProgress(){

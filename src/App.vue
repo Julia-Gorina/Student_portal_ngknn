@@ -3,6 +3,7 @@
     <router-view/>
   </div>
   <Nav/>
+
 </template>
 
 <script>
@@ -12,13 +13,44 @@ export default {
   name: "App",
   components: {
     Nav
+  },
+  methods:{
+
+  },
+  mounted() {
+    let group = localStorage.getItem('group_id');
+    let teacher = localStorage.getItem('teacher_id');
+    if (!group && !teacher){
+      this.$router.push('/schedule')
+    }
   }
 }
 </script>
 
 <style lang="less">
+
+.add-button {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+}
+
+body{
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
   .body{
-    padding-bottom: 66px;
+    padding:
+        env(safe-area-inset-top, 20px)
+        env(safe-area-inset-right, 20px)
+        env(safe-area-inset-bottom, 66px)
+        env(safe-area-inset-left, 20px);
+    &::after{
+      display: block;
+      content: "";
+      height: 66px;
+    }
   }
   *{
     box-sizing: border-box;

@@ -12,10 +12,15 @@
         {{ item.subject }}
       </div>
       <div class="lesson__teacher">
-        {{ item.teacher }}
+        <span v-if="teacher">
+              Группа: {{item.group}}
+          </span>
+        <span v-else>
+             {{ item.teacher }}
+          </span>
       </div>
       <div class="lesson__office">
-        {{ item.classroom }}
+       Аудитория: {{ item.classroom }}
       </div>
       <div v-if="item.subject === ''">
         Урок отменен
@@ -40,11 +45,12 @@ export default {
   },
   props: {
     lesson: Object,
-    prevLesson: Object
+    prevLesson: Object,
+    today: Boolean,
+    teacher: String
   },
   methods: {
     checkActive() {
-
       this.timer = setInterval(()=>{
         this.now = this.getMinut(new Date().toLocaleTimeString());
 
@@ -64,11 +70,7 @@ export default {
         if (this.endPrevLesson < this.now && this.startLesson > this.endLesson ){
           this.className = 'lesson_active';
         }
-
-
-
       },1000)
-
 
     },
     timeLesson(){
@@ -104,7 +106,9 @@ export default {
     }
 
     this.startLesson = this.getMinut(this.lesson.time);
-    this.checkActive();
+    if (this.today) {
+      this.checkActive();
+    }
   }
 }
 </script>
@@ -139,7 +143,6 @@ export default {
     line-height: 1.25em;
     color: #000000;
     padding: 5px 0;
-
     @media screen and (min-width: 700px){
       font-size: 24px;
     }
@@ -202,6 +205,19 @@ hr{
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin-top: 5px;
   margin-bottom: 5px;
+}
+strong{
+  color: #d13918;
+  text-transform: uppercase;
+  font-size: 14px;
+ text-decoration: underline;
+  @media screen and (min-width: 1000px){
+    font-size: 20px;
+  }
+  @media screen and (min-width: 700px){
+    font-size: 18px;
+  }
+
 }
 
 

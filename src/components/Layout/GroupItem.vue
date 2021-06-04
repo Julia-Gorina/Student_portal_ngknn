@@ -1,8 +1,8 @@
 <template>
   <div class="group">
-    <router-link :to="'/fullschedule/' + group.id " class="link">
+    <span class="link" @click="toLink" :class="bg">
       {{ group.name }}
-    </router-link>
+    </span>
   </div>
 </template>
 
@@ -10,25 +10,59 @@
 export default {
   name: "GroupItem",
   props: {
-    group: Object
+    group: Object,
+    teacher: Boolean,
+    index: Number
   },
   data(){
     return{
+      bg: ''
+    }
+  },
+  methods: {
+    toLink(){
+      if (this.teacher) {
+        localStorage.setItem('teacher_id', this.group.id);
+        localStorage.removeItem('group_id')
+        this.$router.push('/fullschedule_teacher/' + this.group.id)
+      } else {
+        localStorage.setItem('group_id', this.group.id);
+        localStorage.removeItem('teacher_id')
+        this.$router.push('/fullschedule/' + this.group.id)
+      }
 
     }
+  },
+  mounted() {
+
+    switch (this.index % 4 ) {
+      case 0:
+        this.bg = 'blue';
+        break;
+      case 1:
+        this.bg = 'green';
+        break;
+      case 2:
+        this.bg = 'red';
+        break;
+      case 3:
+        this.bg = 'black';
+        break;
+    }
+
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .group {
   /*top: 100px;*/
 }
 
 .list {
+  cursor: pointer;
   text-align: center;
   margin-top: 10px;
-  background: #F9C474;
   border-radius: 3px;
   font-size: 20px;
   width: 100%;
@@ -48,6 +82,28 @@ export default {
   height: 100px;
 }
 
+.link{
+  background-color: #F9C474;
+  &.red{
+    background-color: #B94F4F;
+  }
+
+  &.green {
+    background-color: #D13918;
+  }
+
+  &.blue{
+    background-color: #F9C474;
+  }
+  &.black{
+    background-color: #FF7A00;
+  }
+
+
+}
+
+
+
 .grid .link {
   display: flex;
   justify-content: center;
@@ -56,7 +112,6 @@ export default {
   color: black;
   text-align: center;
   margin-top: 10px;
-  background: #F9C474;
   border-radius: 15px;
   font-size: 20px;
   width: 100%;
@@ -70,16 +125,18 @@ export default {
   text-decoration: none;
   color: black;
   text-align: center;
-  background: #F9C474;
-  border-radius: 15px;
+  border-radius: 10px;
   font-size: 20px;
   width: 100%;
-  height: 100%;
+  padding: 10px;
+
 }
+
 
 @media screen and  (max-width: 1170px) {
   .grid {
     width: 25%;
+    font-size: 16px;
   }
 }
 
@@ -92,6 +149,9 @@ export default {
 @media screen and  (max-width: 520px) {
   .grid {
     width: 50%;
+    .link{
+      font-size: 1rem;
+    }
   }
 }
 

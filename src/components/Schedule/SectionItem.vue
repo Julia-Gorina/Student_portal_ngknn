@@ -1,7 +1,7 @@
 <template>
   <div class = "section">
     <div class = "section__image">
-      <a :href="section.url" target="_blank"><img :src="section.image" alt=""></a>
+      <a :href="section.url" target="_blank"><img :src="'http://s.ngknn.ru:8001' + section.image" alt=""></a>
     </div>
     <div class = "section__name">
       {{ section.name }}
@@ -26,6 +26,11 @@ export default {
 .section__image{
   margin-top: 22px;
 }
+
+img{
+  max-width: 100%;
+}
+
 .section__name{
   margin-top: 7px;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

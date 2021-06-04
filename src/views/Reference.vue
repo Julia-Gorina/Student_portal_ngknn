@@ -12,8 +12,8 @@
       <span v-if="errorReference.student">Поле оформлено не верно</span>
       <PageInput title="Введите дату рождения:" id="threeName" type="date" v-model="reference.birthday" />
       <span v-if="errorReference.birthday">Поле оформлено не верно</span>
-      <PageInput title="Введите количество справок:" id="fourName"  type="number" v-model.number.trim="reference.quantity" />
-      <span v-if="errorReference.quantity">Поле оформлено не верно</span>
+      <PageInput title="Введите количество справок:" id="fourName"  type="number"   v-model.number.trim="reference.quantity" />
+      <span v-if="errorReference.quantity">Доступное количество справок от 1 до 6</span>
       <Select title="Выберите место требования:"
               id="fiveName"
               :options="options"
@@ -99,7 +99,7 @@ export default {
         this.errorReference.birthday = true;
         countErrors++;
       }
-      if (+this.reference.quantity < 1) {
+      if (+this.reference.quantity < 1 || +this.reference.quantity > 6) {
         this.errorReference.quantity = true;
         countErrors++;
       }
@@ -108,15 +108,11 @@ export default {
         countErrors++;
       }
 
-
-
       if (countErrors > 0 ){
         return true
       } else  {
         return false
       }
-
-
     },
     async postReference() {
       {
@@ -138,13 +134,11 @@ export default {
                   where: ''
             }
           }
+
         }
         catch (e) {
-
-          this.loading = false
-          if (e.message == "Network Error") {
-            this.error = true;
-          }
+          this.loading = false;
+          this.error = true;
         }
 
       }

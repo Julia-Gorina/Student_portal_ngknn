@@ -14,7 +14,9 @@ export default {
     title: String
   },
   computed:{
-    
+    active(){
+      return ((this.$route.fullPath.includes('department') || this.$route.fullPath.includes('fullschedule'))|| this.$route.fullPath.includes('teachers')) && this.title === "Расписание";
+    }
   }
 }
 </script>

@@ -1,16 +1,19 @@
 <template>
   <div class="home">
-    <MainHeader>Доброе утро!</MainHeader>
+    <MainHeader :title="timeDay ? 'Добрый день' : 'Доброе утро' " ></MainHeader>
+    <a href="https://forms.gle/zuMx5xg4ghAA1Dgz9" id="Opros">Опрос</a>
     <div class="navBar">
     <NumberOfPairs :lessons="lessons" :day="today" />
     <next-day  @click="toggleDay" :title="today ? 'Завтра': 'Сегодня'"></next-day>
     </div>
     <img src="img/layout/header/123.jpg" alt="" class="home-img">
     <DateAndWeek :day="today" />
-    <template v-for="(lesson, index) in lessons" :key="lesson.id">
-      <Lesson :lesson="lesson" :prevLesson="lessons[index-1]"/>
-      <Pause v-if="index !== lessons.length - 1" :lesson="[lesson ,lessons[index+1]]"/>
-    </template>
+    <div v-if="lessons.length !== 0">
+        <LessonAndPause :teacher="teacher" v-for="(lesson, index) in lessons" :key="lesson.id" :today="today" :lesson="lesson" :lessons="lessons" :index="index" />
+    </div>
+    <div v-else class="dont-lesson">
+      <h2>Сегодня нет уроков, или у Вас не работает интернет</h2>
+    </div>
     <transition name="fade">
       <Loading v-show="loading"/>
     </transition>
@@ -21,9 +24,8 @@
 import MainHeader from '@/components/Layout/MainHeader.vue'
 import DateAndWeek from '@/components/Layout/DateAndWeek.vue'
 import NumberOfPairs from '@/components/Layout/NumberOfPairs.vue'
-import Lesson from '@/components/Schedule/Lesson.vue'
-import Pause from '@/components/Schedule/Pause.vue'
 import Loading from '@/components/Layout/Loading.vue'
+import LessonAndPause from '@/components/Layout/LessonAndPause.vue'
 
 import axios from 'axios'
 import NextDay from "@/components/Layout/NextDay";
@@ -37,14 +39,16 @@ export default {
       isTop: null,
       today: true,
       date: null,
+      now: null,
+      group: null,
+      teacher: null,
     }
   },
   props: {
     day: String
   },
   components: {
-    NextDay,
-    Lesson, Pause, Loading, MainHeader, NumberOfPairs, DateAndWeek
+    NextDay, Loading, MainHeader, NumberOfPairs, DateAndWeek, LessonAndPause
   },
   methods: {
     toggleDay(){
@@ -63,8 +67,16 @@ export default {
     },
     async getLesson(date) {
       date = this.getDateString(date);
-      let data = (await axios.get(this.$store.getters.getServer+ '/api/lessons_with_changes/1/' + date + '/')).data;
+      let data
+      if (this.teacher) {
+        data = (await axios.get(this.$store.getters.getServer+ '/api/lessons_with_changes_t/' +this.teacher+ '/' + date + '/')).data;
+      } else {
+        data = (await axios.get(this.$store.getters.getServer+ '/api/lessons_with_changes/' +this.group+ '/' + date + '/')).data;
+      }
+
+
       let lessons = data.lessons;
+      let changes = data.changes;
       // let change = data.change;
 
 
@@ -74,6 +86,7 @@ export default {
         let index = newLesson.findIndex(el=> el.time == element.start_time && (el.is_top === element.is_top || el.is_top === null)  )
         if(index === -1){
           newLesson.push({
+            id: element.id,
             time: element.start_time,
             duration: element.duration,
             is_top: element.is_top,
@@ -83,7 +96,8 @@ export default {
                 subject: element.subject,
                 teacher: element.teacher,
                 classroom: element.classroom,
-                change: element.change
+                change: element.change,
+                group: element.group,
               }
             ]
           })
@@ -93,11 +107,35 @@ export default {
             subject: element.subject,
             teacher: element.teacher,
             classroom: element.classroom,
-            change: element.change
+            change: element.change,
+            group: element.group,
           })
         }
       });
-      this.lessons = newLesson;
+
+      changes.forEach(change => {
+        if (change.lesson) {
+          newLesson.forEach(element => {
+            let index =  element.lessons.findIndex(lesson => lesson.id === change.lesson);
+            if(index !== -1) {
+              change.change = true;
+              element.lessons[index] = change
+            }
+          })
+        }
+      //  ToDO: Дописать новые пары которых небыло
+      })
+
+
+      this.lessons = newLesson.sort((a,b) => {
+        if(a.week_day > b.week_day) return 1;
+        if(a.week_day < b.week_day) return -1;
+        if(a.week_day == b.week_day) {
+          if(a.time > b.time) return 1;
+          if(a.time < b.time) return -1;
+          if(a.time == b.time) return 0;
+        }
+      });
         this.loading = false;
     },
     week(){
@@ -110,7 +148,20 @@ export default {
       return Boolean(week)
     }
   },
+  computed: {
+    timeDay(){
+      if (this.date && this.date.toLocaleTimeString() > '12:00:00'){
+        return true;
+      }
+      return false
+    }
+  },
   mounted() {
+    this.group = localStorage.getItem('group_id');
+    this.teacher = localStorage.getItem('teacher_id');
+    if (!this.group && !this.teacher) {
+      this.$router.push('/schedule')
+    }
     this.date = new Date();
     this.getLesson(this.date);
     this.isTop = this.week()
@@ -126,8 +177,11 @@ export default {
 .home-img{
 width: 100%;
   padding-top: 4px;
+}
 
-
+.dont-lesson{
+  padding: 20px;
+  text-align: center;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -146,5 +200,10 @@ width: 100%;
 .navBar{
   display: flex;
   justify-content: space-between;
+}
+#Opros{
+  position: absolute;
+  top: 14px;
+  right: 5px;
 }
 </style>

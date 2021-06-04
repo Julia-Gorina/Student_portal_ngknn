@@ -9,9 +9,13 @@
 <script>
 export default {
   name: "MainHeader",
+  data(){
+    return{
+
+    }
+  },
   props: {
     title: String,
-
   }
 }
 </script>

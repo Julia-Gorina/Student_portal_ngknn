@@ -27,8 +27,11 @@ export default {
   padding-top: 5px;
   padding-bottom: env(safe-area-inset-bottom, 10px);
   bottom: 0;
-  left: 0;
+
   width: 100%;
+
+  max-width: 760px;
+  margin: 0 auto;
 }
 .menu{
   font-size:9px;

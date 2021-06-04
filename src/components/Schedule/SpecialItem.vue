@@ -1,7 +1,7 @@
 <template>
   <router-link :to="'/department/'+special.id" class = "special">
     <div class = "special__image">
-      <img :src="special.image" alt="">
+      <img :src="'http://s.ngknn.ru:8001' + special.image" alt="">
     </div>
     <div class = "special__name">
       {{ special.name }}
@@ -22,6 +22,10 @@ export default {
 a{
   text-decoration: none;
   color: black;
+}
+
+img{
+  max-width: 100%;
 }
 
 .special{

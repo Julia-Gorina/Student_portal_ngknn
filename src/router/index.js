@@ -47,7 +47,18 @@ const routes = [
     path: '/department/:id',
     name: 'Department',
     component: Department
-  }
+  },
+  {
+    path: '/teachers',
+    name: 'Teacher',
+    component: Department
+  },
+  {
+    path: '/fullschedule_teacher/:id',
+    name: 'Fullschedule_teacher',
+    component: FullSchedule,
+    props: true
+  },
 ]
 
 const router = createRouter({

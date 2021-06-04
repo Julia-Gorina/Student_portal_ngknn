@@ -2,7 +2,8 @@
   <div class="schedule grad">
     <div class="header">
       <Arrow></Arrow>
-      <title-schedule class="title">Расписание занятий группы {{ group }}</title-schedule>
+      <title-schedule class="title" v-if="$route.fullPath.includes('fullschedule_teacher')">Расписание занятий <br>{{ teacher }}</title-schedule>
+      <title-schedule class="title" v-else>Расписание занятий группы {{ group }}</title-schedule>
     </div>
     <div class="v-btn">
       <nav-button v-for="day in days"
@@ -46,8 +47,16 @@ export default {
       this.currentDay = this.days.find(el => el.id === id);
     },
     async getScheule() {
-      let lessons = (await axios.get(this.$store.getters.getServer + '/api/lessons/' + this.id + '/')).data;
-      this.group = lessons[0].group;
+      let lessons
+      if( this.$route.fullPath.includes('fullschedule_teacher')){
+         lessons = (await axios.get(this.$store.getters.getServer + '/api/lessons_t/' + this.id + '/')).data;
+        this.teacher = (await axios.get(this.$store.getters.getServer + '/api/teachers/' + this.$route.params.id + '/')).data.teacher[0].name;
+      }
+      else {
+         lessons = (await axios.get(this.$store.getters.getServer + '/api/lessons/' + this.id + '/')).data;
+        this.group = (await axios.get(this.$store.getters.getServer + '/api/groups/' + this.$route.params.id + '/')).data[0].name;
+      }
+
       let newLesson = [];
       lessons.forEach(element => {
         let index = newLesson.findIndex(el => el.time == element.start_time && el.week_day === element.week_day && (el.is_top === element.is_top || el.is_top === null))
@@ -64,6 +73,7 @@ export default {
                 teacher: element.teacher,
                 classroom: element.classroom,
                 change: element.change,
+                group: element.group,
               }
             ]
           })
@@ -74,10 +84,19 @@ export default {
             teacher: element.teacher,
             classroom: element.classroom,
             change: element.change,
+            group: element.group,
           })
         }
       });
-      this.lessons  = newLesson;
+      this.lessons  = newLesson.sort((a,b) => {
+        if(a.week_day > b.week_day) return 1;
+        if(a.week_day < b.week_day) return -1;
+        if(a.week_day == b.week_day) {
+          if(a.time > b.time) return 1;
+          if(a.time < b.time) return -1;
+          if(a.time == b.time) return 0;
+        }
+      });
     },
     week(){
       this.date=new Date();
@@ -108,6 +127,7 @@ export default {
       },
       isTop: null,
       group: null,
+      teacher: null,
       lessons: [],
       date: null,
       days: [

@@ -19,7 +19,7 @@ export default {
     return {
       date: new Date(),
       month: ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Сентября','Октября', 'Ноября','Декабря'],
-      WeekText: ['Понедельник', 'Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье']
+      WeekText: ['Воскресенье', 'Понедельник', 'Вторник','Среда','Четверг','Пятница','Суббота']
     }
   },
   watch: {
@@ -39,7 +39,7 @@ export default {
       let dayWeek = begin.getDay();
       let week = Math.ceil((((this.date - begin) / 1000 / 60 / 60 / 24 + dayWeek-1  ) / 7));
       week = week%2 !== 0 ? 'Нижняя' : 'Верхняя'
-      let str = `${this.WeekText[this.date.getDay()-1]}, ${week} неделя`;
+      let str = `${this.WeekText[this.date.getDay()]}, ${week} неделя`;
       return str
     }
   },
@@ -59,7 +59,7 @@ export default {
   justify-content: space-between;
   align-items: baseline;
   font-size: 18px;
-  line-height: 20px;
+  line-height: 1.5em;
   padding-top: 5px;
   padding-bottom: 5px;
   font-family: 'Comfortaa';
@@ -69,7 +69,7 @@ export default {
   &__week{
     font-size: 11px;
     font-family: 'Comfortaa';
-    line-height: 12px;
+    line-height: 1.5em;
     text-transform: uppercase;
     padding-right: 11px ;
     @media screen and (min-width: 750px){
